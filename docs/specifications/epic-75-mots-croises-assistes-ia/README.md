@@ -28,7 +28,7 @@ E53 et l’inscription sans passage de la tombola publique E74 restent distincte
 | [Architecture et contrats](architecture-contrats.md) | Existant vérifié, domaine, transactions, DTO, compatibilité et données |
 | [Vérification et livraison](verification-livraison.md) | Matrice des 18 critères, bornes et budgets, migrations, exploitation et preuves à produire |
 
-Socles réutilisés : [E55](../moteur-animation/README.md),
+Socles réutilisés : [E55](../epic-55-moteur-animation/README.md),
 [E73](../epic-73-animation-et-ou-coffrets/README.md),
 [Live E42](../epic-42-localeo-live/README.md),
 [PIN E70](../epic-70-validation-pin/README.md),

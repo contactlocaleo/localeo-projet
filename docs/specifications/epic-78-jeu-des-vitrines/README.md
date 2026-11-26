@@ -76,7 +76,7 @@ locale et sa validation ont commencé le 16 novembre ; l’état produit est
 L'inclusion dans l'offre standard ne rend pas le moteur disponible
 avant la livraison coordonnée de ses producteurs et consommateurs.
 
-Références : [moteur E55](../moteur-animation/README.md),
+Références : [moteur E55](../epic-55-moteur-animation/README.md),
 [participation E56](../epic-56-validation-participation-commercants-animation/README.md),
 [Live E42](../epic-42-localeo-live/README.md),
 [offre E73](../epic-73-animation-et-ou-coffrets/README.md),

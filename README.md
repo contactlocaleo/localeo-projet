@@ -14,7 +14,7 @@ Ouvrir [localeo.code-workspace](localeo.code-workspace) dans VS Code, avec les c
 
 - [Produit](docs/produit/INDEX.md)
 - [Architecture](docs/architecture/INDEX.md) et [conventions transverses](docs/architecture/transverse/README.md)
-- [Spécifications par fonctionnalité](docs/specifications/INDEX.md), [moteur d’animation](docs/specifications/moteur-animation/localeo_animation_engine_spec.md)
+- [Spécifications par fonctionnalité](docs/specifications/INDEX.md), [moteur d’animation](docs/specifications/epic-55-moteur-animation/localeo_animation_engine_spec.md)
 - [Roadmap commune](docs/roadmap/README.md) et [anomalies](docs/roadmap/anomalies)
 - [Exploitation](docs/exploitation/INDEX.md), [juridique](docs/juridique/INDEX.md), [audits](docs/audits/INDEX.md)
 - [Profils et jeux installés en test et démo](docs/exploitation/demonstration/environnements.md)

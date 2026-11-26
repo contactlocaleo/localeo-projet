@@ -6,7 +6,7 @@
 
 **24 novembre 2026 — EPIC 83, En cours.** [Clés d’accès dans Localeo Pro](en-cours/epic-83-cles-acces-localeo-pro-backlog.md). Connexion WebAuthn réalisée localement pour les titulaires et les salariés. La recette sur appareils physiques et l’activation par environnement restent à mener.
 
-**24 novembre 2026 — EPIC 82, À faire.** [Scan QR depuis l’appareil photo avec Localeo Pro](a-faire/epic-82-scan-qr-externe-localeo-pro-backlog.md). Accès direct à l’action pour coffrets, participations et bons numériques après connexion si nécessaire. Confirmation explicite et scanner historique conservés.
+**24 novembre 2026 — EPIC 82, Terminée sur TEST.** Accès direct à l’action pour coffrets, participations et bons numériques après connexion si nécessaire. Confirmation explicite et scanner historique conservés. [Backlog](terminees/epic-82-scan-qr-externe-localeo-pro-backlog.md), [bilan de clôture](../specifications/epic-82-scan-qr-externe-localeo-pro/README.md#clôture-sur-test-le-24-novembre-2026)
 
 **24 novembre 2026 — E56-EVO-ACHAT-PASSEPORT.** En préparation d’un Passeport
 commerçant, choisir **Achat requis** ou **Visite sans achat** et appliquer la
@@ -251,8 +251,8 @@ les 85 identifiants du tronc commun et trois identifiants applicatifs distincts.
 
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
-| Terminees | 64 | [terminees/](terminees/README.md) |
-| A faire | 9 | [a-faire/](a-faire/README.md) |
+| Terminees | 65 | [terminees/](terminees/README.md) |
+| A faire | 8 | [a-faire/](a-faire/README.md) |
 | En cours | 12 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
@@ -450,7 +450,7 @@ précise la provenance et les divergences historiques conservées.
 | 78 | En cours | [Le jeu des vitrines](../specifications/epic-78-jeu-des-vitrines/README.md) : spécification du 15 novembre, 6 US et 16 critères ; QCM unique, préparation Pro/contrôle terrain, qualification E77 avec/sans passages, offre standard ; sept arbitrages résolus ; parcours et démo vérifiés, charge soutenue non qualifiée ([bilan](../specifications/epic-78-jeu-des-vitrines/bilan-realisation.md)), modèle inactif |
 | 79 | A faire | [Escape Game assisté par l’IA](a-faire/epic-79-escape-game-assiste-ia-backlog.md) : 7 US et 18 critères cibles ; préparation IA selon le processus de la chasse E55, validation avant publication, terrain commune/commerces et progression sur un téléphone confirmés ; quatre arbitrages résolus, quatre ouverts, sans implémentation |
 | 81 | En cours | [Clarté des parcours publics Marketplace](en-cours/epic-81-parcours-ux-marketplace-20261118-backlog.md) : sept orientations UX P0/P1 validées, cinq améliorations de présentation réalisées localement ; contrôle du catalogue d'ouverture, recette Stripe TEST et tests humains ouverts. |
-| 82 | À faire | [Scan QR depuis l’appareil photo avec Localeo Pro](a-faire/epic-82-scan-qr-externe-localeo-pro-backlog.md) : trois familles de QR clients, reprise après connexion et scanner historique préservé. |
+| 82 | Terminée | [Scan QR depuis l’appareil photo avec Localeo Pro](terminees/epic-82-scan-qr-externe-localeo-pro-backlog.md) · Validation sur TEST confirmée le 24 novembre 2026. |
 | 83 | En cours | [Clés d’accès dans Localeo Pro](en-cours/epic-83-cles-acces-localeo-pro-backlog.md) : connexion sans saisie du mot de passe, gestion des clés et bascule Ops réalisées localement, recette et activation par cible à mener. |
 | 84 | En cours | [Adhérents hors commune dans Localeo Animation](en-cours/epic-84-adherents-hors-commune-animation-backlog.md). Saisie, import, participation en magasin, agendas Live et renouvellement du réseau. |
 | 85 | En cours | [Parcours organisateur et maquettes](en-cours/epic-85-parcours-organisateur-backlog.md). Refonte des onglets et du contenu des fiches d’animation. |

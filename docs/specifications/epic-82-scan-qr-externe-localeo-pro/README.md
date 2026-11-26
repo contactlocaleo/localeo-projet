@@ -1,6 +1,6 @@
 # EPIC 82 — Scanner un QR client depuis l’appareil photo avec Localeo Pro
 
-Spécification fonctionnelle et technique du 24 novembre 2026. Le [backlog E82](../../roadmap/a-faire/epic-82-scan-qr-externe-localeo-pro-backlog.md) porte les critères d’acceptation. La [roadmap commune](../../roadmap/README.md) porte l’état produit.
+Spécification fonctionnelle et technique du 24 novembre 2026. Le [backlog E82](../../roadmap/terminees/epic-82-scan-qr-externe-localeo-pro-backlog.md) porte les critères d’acceptation. La [roadmap commune](../../roadmap/README.md) porte l’état produit. [Clôture et preuves](#clôture-sur-test-le-24-novembre-2026)
 
 ## Périmètre et décisions
 
@@ -89,7 +89,7 @@ Les deux entrées Pro s’appuient sur les mêmes routes protégées, avec le Be
 
 ## Traçabilité et recette
 
-| Critère | Propriétaire et preuve locale consignée | Preuve attendue sur TEST et impacts |
+| Critère | Propriétaire et preuve locale consignée | Protocole de recette TEST et impacts |
 | --- | --- | --- |
 | E82-CA-01 | Pro. Playwright couvre caméra simulée et saisie pour les trois familles et les deux profils. | Employer des anciens et nouveaux QR avec caméra réelle et vérifier la saisie sans caméra. Guide Commerçant, chapitre 3. |
 | E82-CA-02, CA-03 | Pro et accès backend. Playwright couvre les trois familles et les deux profils, sessions active, absente et expirée. | Ouvrir les liens depuis les lecteurs des deux téléphones et confirmer la reprise de destination après connexion. |
@@ -120,7 +120,10 @@ Le scanner salarié attendait un statut `ABSENTE` dans une réponse réussie. Le
 - **Marketplace et Live.** Treize scénarios ciblés réussis sur les parcours actuels, dont l’impression, la copie, l’affichage du QR Passeport, l’ouverture d’un coffret et le PIN. La relecture des échecs historiques a identifié des attentes d’interface ou des fixtures décalées des parcours actuels. Les tests utilisent des réponses simulées.
 - **Guides.** Le correctif réutilise le message de relecture et le bouton de nouveau scan déjà présents pour un résultat non confirmé. Le guide Commerçant décrit déjà ces gestes et sa copie PDF a été vérifiée. Le guide Animation concerne les gestes de l’organisateur et ne décrit pas ce traitement du reçu. Aucun impact sur les contrats HTTP, les migrations ou les données de démonstration.
 
-### Points à vérifier avant activation
+### Clôture sur TEST le 24 novembre 2026
 
-- **E82-CA-05, reçu Animation absent.** Recetter un salarié dont la commande n’a pas été enregistrée pour confirmer l’état affiché et la reprise manuelle sur la cible intégrée.
-- **E82-CA-07, parcours client.** Vérifier les parcours Marketplace et Live avec le backend de la cible. Décoder les nouveaux visuels sur écran, en impression et dans un client mail réel. Vérifier la destination après connexion sur iPhone et Android et refaire un scan historique après activation du nouveau rendu.
+**E82-DEC-CLOTURE-TEST** · Le porteur produit confirme dans la conversation avoir validé E82 en tests et demande sa clôture. Le statut **Terminée** s’appuie sur cette validation globale sur TEST et sur les preuves locales des sept critères ci-dessus. Les scénarios détaillés, les appareils et les références des artefacts déployés sur TEST n’ont pas été communiqués dans cette confirmation.
+
+- Les sources E82 sont poussées sur `main` dans Projet (`65bad04`), Localeo Pro (`0a0864e`) et Backend (`2c0b082`). Ces SHA identifient les versions de référence du code et de la documentation.
+- Les vérifications locales portent sur les deux entrées, les trois familles de QR, les deux profils, la confirmation et la reprise du reçu. Le PDF du guide Commerçant de la révision E82 compte 13 pages et sa copie embarquée est identique. Le guide Animation conserve les gestes de l’organisateur.
+- La promotion DEMO et PROD suivra une livraison distincte. Les TARGET backend locaux contiennent l’origine de Pro propre à chaque environnement. Livrer Pro compatible avant d’appliquer la valeur du backend. Contrôler ensuite le scan direct, l’ancien scanner et la reprise du reçu sur la cible. E82 réutilise les contrats, les migrations et les accès existants. Pour revenir au rendu historique, redéployer le backend de la cible avec une valeur vide. [Procédure d’activation et de retour arrière](../../exploitation/deploiement/commercant/mise-en-production.md#activer-le-scan-depuis-lappareil-photo--e82)

@@ -10,14 +10,14 @@
 - Antériorité : l'[E41](../terminees/epic-41-plateforme-animation-locale-mvp-backlog.md)
   mentionne l'Escape Game parmi les extensions futures, sans en définir le jeu.
   Ce cadrage ne rouvre pas E41.
-- Socles : [moteur et chasse E55](../../specifications/moteur-animation/README.md),
+- Socles : [moteur et chasse E55](../../specifications/epic-55-moteur-animation/README.md),
   [Live E42](../../specifications/epic-42-localeo-live/README.md),
   [participation commerçante E56](../../specifications/epic-56-validation-participation-commercants-animation/README.md),
   [Animation E73](../../specifications/epic-73-animation-et-ou-coffrets/README.md).
   L'[E75](../../specifications/epic-75-mots-croises-assistes-ia/README.md) donne
   un autre précédent de préparation assistée, sans imposer son offre commerciale
   à E79. Le processus retenu est celui de la chasse E55 :
-  [préparation manuelle outillée et import contrôlé](../../specifications/moteur-animation/conception-technique.md).
+  [préparation manuelle outillée et import contrôlé](../../specifications/epic-55-moteur-animation/conception-technique.md).
 - Le moteur E55 prévoit déjà QCM, information, association, remise en ordre et
   saisie de mot/code. La réutilisation de ces activités est à examiner ; un
   nouveau jeu ne signifie pas nécessairement un nouveau moteur indépendant.

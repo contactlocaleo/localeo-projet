@@ -4,6 +4,8 @@
 
 ## Perimetre
 
+La [spécification canonique](../../specifications/epic-10-authentification-commercant/README.md) décrit le parcours de connexion et de récupération.
+
 Epic source : `Epic 10. Authentification commercant par login / mot de passe`
 Reference : [docs/roadmap/product-roadmap.md](../product-roadmap.md)
 

@@ -11,7 +11,7 @@
   noms de fichiers des quatre dépôts applicatifs ; aucun cadrage de ce jeu trouvé.
 - Demande : valoriser les vitrines, notamment à **Noël et à Pâques**, en faisant
   chercher aux habitants **un intrus dans la vitrine** des commerces participants.
-- Socles à réutiliser : [moteur E55](../../specifications/moteur-animation/README.md),
+- Socles à réutiliser : [moteur E55](../../specifications/epic-55-moteur-animation/README.md),
   [participation commerçante E56](../../specifications/epic-56-validation-participation-commercants-animation/README.md),
   [Live E42](../../specifications/epic-42-localeo-live/README.md),
   [Animation E73](../../specifications/epic-73-animation-et-ou-coffrets/README.md).

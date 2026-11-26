@@ -4,9 +4,7 @@ Spécifications V1 du 5 octobre : [E70 — PIN](../../specifications/epic-70-val
 
 [Retour à la roadmap](../README.md)
 
-Neuf EPIC sont classées à faire. Les bilans techniques et réserves de chaque backlog restent conservés.
-
-- [EPIC 82 — Scanner un QR client depuis l’appareil photo avec Localeo Pro](epic-82-scan-qr-externe-localeo-pro-backlog.md) : ouverture directe pour Coffret, Animation et bon numérique, avec confirmation explicite et scanner historique conservé.
+Huit EPIC sont classées à faire. Les bilans techniques et réserves de chaque backlog restent conservés.
 
 - [EPIC 79 — Escape Game assisté par l’IA](epic-79-escape-game-assiste-ia-backlog.md) : préparation IA et validation avant publication selon le processus de la chasse E55, jeu dans la commune/commerces guidé par Live et un téléphone confirmés ; 7 US, 18 critères cibles, quatre arbitrages ouverts.
 

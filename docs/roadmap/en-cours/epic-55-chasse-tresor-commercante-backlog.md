@@ -7,15 +7,15 @@
 - Catalogue V1 : `PASSEPORT_COMMERCANT`, `TOMBOLA_LOCALE`, `CHASSE_TRESOR_COMMERCANTE`.
 - Dependances : Epics 41, 42, 46, 47 et 49.
 
-La [specification detaillee unique](../../specifications/moteur-animation/localeo_animation_engine_spec.md) porte les regles, les decisions, les contrats proposes et la recette. Cette fiche conserve uniquement le suivi de livraison.
+La [specification detaillee unique](../../specifications/epic-55-moteur-animation/localeo_animation_engine_spec.md) porte les regles, les decisions, les contrats proposes et la recette. Cette fiche conserve uniquement le suivi de livraison.
 
 ## Lot de conception technique
 
-- [x] Dossier de conception couvrant contrats, persistance, concurrence, API/droits, médias et exploitation, établi à partir du code et relu le 19 septembre 2026 : [référence technique V1](../../specifications/moteur-animation/conception-technique.md).
+- [x] Dossier de conception couvrant contrats, persistance, concurrence, API/droits, médias et exploitation, établi à partir du code et relu le 19 septembre 2026 : [référence technique V1](../../specifications/epic-55-moteur-animation/conception-technique.md).
 - [x] Implémenter les lots T1–T6 et exécuter les contrôles techniques locaux ; preuves et limites dans le suivi.
 - [ ] Achever les critères d’ouverture T6 : conversion sur cible, pilote humain, contrôle d’exploitation et déploiement coordonné.
 
-Compte rendu par lot, décisions et preuves : [suivi d’implémentation](../../specifications/moteur-animation/suivi-implementation.md). Les cases cochées correspondent au code livré et vérifié localement, avec preuves par lot. Les opérations sur cible, le pilote et les droits ERP non accordés restent explicitement ouverts ; aucun déploiement n’est implicite.
+Compte rendu par lot, décisions et preuves : [suivi d’implémentation](../../specifications/epic-55-moteur-animation/suivi-implementation.md). Les cases cochées correspondent au code livré et vérifié localement, avec preuves par lot. Les opérations sur cible, le pilote et les droits ERP non accordés restent explicitement ouverts ; aucun déploiement n’est implicite.
 
 ## Livraison proposee
 
@@ -108,7 +108,7 @@ Demande : améliorer l’accueil des joueurs grâce à une image mettant en scè
 - [x] E55-ILL-01-B : vérifier la non-régression de l’héritage, de la sélection des médias et des projections existantes ; suite ciblée et architecture : 505 tests réussis sous Python 3.14.
 - [ ] Évaluer une génération outillée et la compréhension des scènes par des joueurs ; aucune génération réelle réalisée pour cette modification de prompt.
 
-Impacts, critères et preuves dans la [spécification canonique, section 8.1.2](../../specifications/moteur-animation/localeo_animation_engine_spec.md#812-thème-visuel-et-illustrations-de-lanimation). Aucun changement de statut de l’epic, de schéma ou de règle de publication. Les animations et prompts déjà enregistrés ne sont pas réécrits.
+Impacts, critères et preuves dans la [spécification canonique, section 8.1.2](../../specifications/epic-55-moteur-animation/localeo_animation_engine_spec.md#812-thème-visuel-et-illustrations-de-lanimation). Aucun changement de statut de l’epic, de schéma ou de règle de publication. Les animations et prompts déjà enregistrés ne sont pas réécrits.
 
 ## Évolution du 24 septembre 2026 — E55-UX-08
 
@@ -123,8 +123,8 @@ navigation différentes, et seuls les coffrets avaient une fiche consultable.
 - [x] E55-UX-08-C : fil d’Ariane commun sur bureau/mobile, navigation sans sauvegarde implicite ni perte des saisies ; phases de Chasse et blocages conservés.
 - [x] E55-UX-08-D : preuves navigateur sur les trois modèles, non-régression des commandes et vérifications frontend/documentaires.
 
-La [conception T6-UX08](../../specifications/moteur-animation/conception-technique.md#t6-ux08--sélections-et-fil-dariane-communs-e55-ux-08)
-décrit les comportements et impacts ; le [suivi d’implémentation](../../specifications/moteur-animation/suivi-implementation.md)
+La [conception T6-UX08](../../specifications/epic-55-moteur-animation/conception-technique.md#t6-ux08--sélections-et-fil-dariane-communs-e55-ux-08)
+décrit les comportements et impacts ; le [suivi d’implémentation](../../specifications/epic-55-moteur-animation/suivi-implementation.md)
 consigne les preuves. Cette extension ne change ni le statut de l’epic ni les
 conditions métier de publication, et ne nécessite aucune migration.
 
@@ -135,7 +135,7 @@ sur flyers illustrés, kit et mode opératoire dans l’application commerçant,
 option de suivi bloquant le démarrage tant que les participants ne sont pas prêts,
 sauf forçage explicite. Voir les critères **E55-KIT-01 à 03** et
 **E55-SUIVI-01 à 04** dans la
-[conception canonique](../../specifications/moteur-animation/conception-technique.md#évolution-du-24-septembre-2026--kit-commerçant-et-préparation-du-démarrage).
+[conception canonique](../../specifications/epic-55-moteur-animation/conception-technique.md#évolution-du-24-septembre-2026--kit-commerçant-et-préparation-du-démarrage).
 
 - [x] Livrer et vérifier les nouveaux prompts et les kits accessibles au seul commerce concerné.
 - [x] Livrer et vérifier le suivi facultatif et sa barrière serveur, avec forçage tracé.
@@ -156,8 +156,8 @@ la largeur desktop ; réserver prompts, requêtes et imports à l'ERP.
 - [x] D : invitations groupées avec destinataires explicites ; contrôle de publication automatique à l'ouverture.
 - [x] E : préserver droits, saisies, relecture, accords, versions et résolution des commandes incertaines.
 
-Critères, impacts et preuves dans la [conception E55-UX-09](../../specifications/moteur-animation/conception-technique.md#e55-ux-09--préparation-centrée-sur-le-parcours-25-septembre-2026)
-et le [suivi d'implémentation](../../specifications/moteur-animation/suivi-implementation.md).
+Critères, impacts et preuves dans la [conception E55-UX-09](../../specifications/epic-55-moteur-animation/conception-technique.md#e55-ux-09--préparation-centrée-sur-le-parcours-25-septembre-2026)
+et le [suivi d'implémentation](../../specifications/epic-55-moteur-animation/suivi-implementation.md).
 Le remplacement éventuel des attestations métier et une prédiction détaillée
 des accords invalidés restent à préciser ; aucune preuve existante n'est
 supprimée implicitement. Le statut de l'epic reste **En cours**.
@@ -172,8 +172,8 @@ détail des actions restantes, alimentés par les contrôles serveur enregistré
 - [x] C : actualisation, erreurs, brouillons et isolation des réponses tardives.
 - [x] D : projection serveur privée, sans modification des règles de publication.
 
-Critères et impacts dans la [conception E55-UX-10](../../specifications/moteur-animation/conception-technique.md#e55-ux-10--avancement-de-la-préparation-26-septembre-2026).
-Les résultats sont consignés dans le [suivi d'implémentation](../../specifications/moteur-animation/suivi-implementation.md).
+Critères et impacts dans la [conception E55-UX-10](../../specifications/epic-55-moteur-animation/conception-technique.md#e55-ux-10--avancement-de-la-préparation-26-septembre-2026).
+Les résultats sont consignés dans le [suivi d'implémentation](../../specifications/epic-55-moteur-animation/suivi-implementation.md).
 
 ## Évolution du 26 septembre 2026 — E55-UX-11, Terrain simplifié
 
@@ -190,8 +190,8 @@ terrain T3 et complète E55-UX-09/10 ; le statut de l’epic reste **En cours**.
 - [x] D : QR utilisables, droits, réception incertaine, clavier/mobile et données
   historiques préservés ; compatibilité avec l’exploitation après publication.
 
-Critères et impacts dans la [conception E55-UX-11](../../specifications/moteur-animation/conception-technique.md#e55-ux-11--terrain-simplifié-26-septembre-2026).
-Les preuves exécutées sont consignées dans le [suivi](../../specifications/moteur-animation/suivi-implementation.md).
+Critères et impacts dans la [conception E55-UX-11](../../specifications/epic-55-moteur-animation/conception-technique.md#e55-ux-11--terrain-simplifié-26-septembre-2026).
+Les preuves exécutées sont consignées dans le [suivi](../../specifications/epic-55-moteur-animation/suivi-implementation.md).
 
 ## Évolution du 26 septembre 2026 — E55-UX-12, supports par responsable
 
@@ -208,8 +208,8 @@ sans remettre en place de checklist ni de double confirmation.
 - [x] D : isolation commerçant, QR utilisable, publication, jauge, reprise réseau
   et déclaration « prêt » indépendante sont préservés.
 
-Voir la [conception E55-UX-12](../../specifications/moteur-animation/conception-technique.md#e55-ux-12--supports-par-responsable-26-septembre-2026)
-et le [suivi](../../specifications/moteur-animation/suivi-implementation.md).
+Voir la [conception E55-UX-12](../../specifications/epic-55-moteur-animation/conception-technique.md#e55-ux-12--supports-par-responsable-26-septembre-2026)
+et le [suivi](../../specifications/epic-55-moteur-animation/suivi-implementation.md).
 Implémentation vérifiée localement ; la recette PostgreSQL et le scan physique
 restent à exécuter avant livraison. Le statut de l’epic reste **En cours**.
 
@@ -225,9 +225,9 @@ les travaux ; elle ne les déclare ni implémentés ni vérifiés.
 Les repères **E55-A01 à E55-A14** du rapport deviennent les critères stables
 de cette évolution. Les défauts du comportement attendu relèvent de correctifs
 rattachés à E55 ; les nouvelles capacités et études restent distinguées.
-Le [complément fonctionnel](../../specifications/moteur-animation/localeo_animation_engine_spec.md#e55-audit-20261113),
-la [conception et sa matrice](../../specifications/moteur-animation/conception-technique.md#e55-audit-20261113)
-et le [bilan de référence](../../specifications/moteur-animation/suivi-implementation.md#e55-audit-20261113)
+Le [complément fonctionnel](../../specifications/epic-55-moteur-animation/localeo_animation_engine_spec.md#e55-audit-20261113),
+la [conception et sa matrice](../../specifications/epic-55-moteur-animation/conception-technique.md#e55-audit-20261113)
+et le [bilan de référence](../../specifications/epic-55-moteur-animation/suivi-implementation.md#e55-audit-20261113)
 portent les scénarios, impacts et limites. Aucun nouveau backlog applicatif.
 
 ### Critères issus des constats
@@ -307,7 +307,7 @@ phase de spécification décrite ci-dessus.
 ### Bilan de l'implémentation locale
 
 Les critères cochés disposent de preuves locales dans le
-[bilan d'implémentation](../../specifications/moteur-animation/suivi-implementation.md#e55-audit-20261113-implementation).
+[bilan d'implémentation](../../specifications/epic-55-moteur-animation/suivi-implementation.md#e55-audit-20261113-implementation).
 Les cases distinguent résultat vérifié et limites restantes ; aucune ne vaut
 déploiement ni validation du pilote. Le code, les migrations, les contrats et
 les adaptations de démonstration remplacent désormais les travaux annoncés
@@ -327,21 +327,21 @@ ouverts ; le statut **En cours** est conservé.
 
 Demande du 13 novembre : une fiche unique depuis l’examen de complétude et le
 refus motivé jusqu’au prompt, à l’import JSON et à la validation finale ; reprise
-du dossier en cours sans recommencer. Les [critères E55-DG-01 à E55-DG-10](../../specifications/moteur-animation/localeo_animation_engine_spec.md#e55-evol-traitement-20261113)
-et la [conception](../../specifications/moteur-animation/conception-technique.md#e55-evol-traitement-20261113)
+du dossier en cours sans recommencer. Les [critères E55-DG-01 à E55-DG-10](../../specifications/epic-55-moteur-animation/localeo_animation_engine_spec.md#e55-evol-traitement-20261113)
+et la [conception](../../specifications/epic-55-moteur-animation/conception-technique.md#e55-evol-traitement-20261113)
 conservent les transitions et contrats existants. L’epic reste **En cours** ;
 le bilan de cette évolution ne remplace pas les conditions historiques d’ouverture.
 
 - [x] Décrire le dossier et ses étapes, les refus, la reprise et les impacts.
 - [x] Réunir le parcours dans la console ERP et raccorder les anciens points d’entrée.
-- [x] Vérifier les comportements et publier le [bilan local](../../specifications/moteur-animation/suivi-implementation.md#e55-evol-traitement-20261113), avec ses limites de recette déployée et de mesure humaine.
+- [x] Vérifier les comportements et publier le [bilan local](../../specifications/epic-55-moteur-animation/suivi-implementation.md#e55-evol-traitement-20261113), avec ses limites de recette déployée et de mesure humaine.
 
 <a id="e55-prompt-clarte-20261115"></a>
 ## Évolution du 15 novembre 2026 — prompt de chasse plus concret
 
 **E55-PROMPT-CLARTE-20261115** : améliorer l’immersion dans la commune,
 la cohérence de l’histoire et la compréhension des énigmes après les premiers
-essais utilisateur. Les [critères E55-PC-01 à PC-05](../../specifications/moteur-animation/localeo_animation_engine_spec.md#e55-prompt-clarte-20261115)
+essais utilisateur. Les [critères E55-PC-01 à PC-05](../../specifications/epic-55-moteur-animation/localeo_animation_engine_spec.md#e55-prompt-clarte-20261115)
 complètent le gabarit Chasse en version 1.3, avec contexte communal serveur,
 fil narratif explicite et méthode de résolution. Le statut de l’epic et les
 conditions d’ouverture restent inchangés.
@@ -350,7 +350,7 @@ conditions d’ouverture restent inchangés.
 - [x] Implémenter et vérifier les nouveaux prompts et leurs révisions explicites : 131 tests ciblés, 41 PostgreSQL et 734 contrôles d’architecture réussis ; limites et revue au bilan.
 - [ ] Relire des histoires réellement générées puis observer leur compréhension lors du pilote.
 
-Le [bilan propre à l’évolution](../../specifications/moteur-animation/suivi-implementation.md#e55-prompt-clarte-20261115)
+Le [bilan propre à l’évolution](../../specifications/epic-55-moteur-animation/suivi-implementation.md#e55-prompt-clarte-20261115)
 distingue les preuves du générateur de la qualification éditoriale sur le terrain.
 
 <a id="e55-prompt-ancrage-20261115"></a>
@@ -359,7 +359,7 @@ distingue les preuves du générateur de la qualification éditoriale sur le ter
 **E55-PROMPT-ANCRAGE-20261115** précise la demande utilisateur après le premier
 passage 1.3 : rechercher des informations sur les lieux et les commerçants,
 mettre en scène leurs particularités et justifier la venue du joueur pour
-résoudre chaque énigme. Les [critères ajoutés E55-PC-06 à PC-10](../../specifications/moteur-animation/localeo_animation_engine_spec.md#e55-prompt-ancrage-20261115)
+résoudre chaque énigme. Les [critères ajoutés E55-PC-06 à PC-10](../../specifications/epic-55-moteur-animation/localeo_animation_engine_spec.md#e55-prompt-ancrage-20261115)
 renforcent PC-02/PC-03 et conservent les autres garanties. Ils définissent le
 gabarit Chasse **1.4**, la recherche dans l’outil d’IA externe et deux livrables
 distincts : dossier documentaire de relecture et JSON seul destiné à l’import.
@@ -369,13 +369,13 @@ distincts : dossier documentaire de relecture et JSON seul destiné à l’impor
 - [ ] Relire une génération complète avec sources effectivement consultées, puis confirmer les observations et supports sur le terrain avant le pilote.
 
 Les 131 tests ciblés, 41 tests PostgreSQL et 734 contrôles d’architecture du
-premier passage ci-dessus restent des preuves de **1.3**. Le [suivi du complément](../../specifications/moteur-animation/suivi-implementation.md#e55-prompt-ancrage-20261115)
+premier passage ci-dessus restent des preuves de **1.3**. Le [suivi du complément](../../specifications/epic-55-moteur-animation/suivi-implementation.md#e55-prompt-ancrage-20261115)
 porte les résultats 1.4 et les limites restantes, sans changer le statut de
 l’epic ni ses conditions d’ouverture.
 
 ## Références
 
-- [Registre TRE-ARB-01 a TRE-ARB-89](../../specifications/moteur-animation/localeo_animation_engine_spec.md#arbitrages).
-- [Besoins PRD-520 a PRD-532 et lots proposes](../../specifications/moteur-animation/localeo_animation_engine_spec.md#livraison).
-- [Compléments de conception](../../specifications/moteur-animation/localeo_animation_engine_spec.md#questions-ouvertes).
-- [Recette et criteres de livraison](../../specifications/moteur-animation/localeo_animation_engine_spec.md#recette).
+- [Registre TRE-ARB-01 a TRE-ARB-89](../../specifications/epic-55-moteur-animation/localeo_animation_engine_spec.md#arbitrages).
+- [Besoins PRD-520 a PRD-532 et lots proposes](../../specifications/epic-55-moteur-animation/localeo_animation_engine_spec.md#livraison).
+- [Compléments de conception](../../specifications/epic-55-moteur-animation/localeo_animation_engine_spec.md#questions-ouvertes).
+- [Recette et criteres de livraison](../../specifications/epic-55-moteur-animation/localeo_animation_engine_spec.md#recette).

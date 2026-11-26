@@ -36,7 +36,7 @@ La demande de participation ne possede pas une mission editable autonome. Elle c
 
 ## Extension de préparation des chasses — à réaliser dans EPIC 55
 
-Le [moteur Chasse, section 8.1.1](../moteur-animation/localeo_animation_engine_spec.md#811-préparation-et-choix-des-missions-commerçantes), étend la mission versionnée à des alternatives par commerçant (TRE-ARB-89). Cette extension cible n’est pas couverte par le statut historique « Terminée » de l’EPIC 56. Elle réutilise ses demandes, droits, échéances, envois et décisions.
+Le [moteur Chasse, section 8.1.1](../epic-55-moteur-animation/localeo_animation_engine_spec.md#811-préparation-et-choix-des-missions-commerçantes), étend la mission versionnée à des alternatives par commerçant (TRE-ARB-89). Cette extension cible n’est pas couverte par le statut historique « Terminée » de l’EPIC 56. Elle réutilise ses demandes, droits, échéances, envois et décisions.
 
 La configuration Chasse contient idéalement deux missions candidates par commerce. Après relecture de l’organisateur, l’invitation présente la version concernée. L’acceptation doit sélectionner une mission et confirmer tous ses prérequis (produit, message, mise en place), avec référence de variante et version, auteur/date et audit ; aucun choix ni accord n’est généré par le LLM. La demande conserve sa référence/son snapshot et n’a pas de mission éditable autonome. La préparation effective est vérifiée avant publication ; une mission n’est pas réputée installée parce que le commerce a accepté de la réaliser.
 
@@ -162,13 +162,13 @@ Les seize arbitrages du registre sont valides. Le motif de refus reste facultati
 
 Le statut historique de l’EPIC 56 reste **Terminée**. La nouvelle demande de kit
 commerçant, supports joueurs par QR et déclaration « prêt » est suivie dans
-[E55-KIT/E55-SUIVI](../moteur-animation/conception-technique.md#évolution-du-24-septembre-2026--kit-commerçant-et-préparation-du-démarrage).
+[E55-KIT/E55-SUIVI](../epic-55-moteur-animation/conception-technique.md#évolution-du-24-septembre-2026--kit-commerçant-et-préparation-du-démarrage).
 Elle distingue le consentement à participer de la réalisation des préparatifs :
 le kit appartient au seul commerce de l’invitation acceptée et la déclaration
 est liée à cette invitation. Le suivi est facultatif à la création ; lorsqu’il
 est actif, il bloque l’ouverture du jeu tant que les commerçants participants
 ne sont pas prêts, sauf forçage explicite et tracé par le gestionnaire habilité.
-Le [suivi d’implémentation E55](../moteur-animation/suivi-implementation.md) porte
+Le [suivi d’implémentation E55](../epic-55-moteur-animation/suivi-implementation.md) porte
 ses preuves et limites propres ; la clôture historique ne vaut pas validation
 de ce nouveau périmètre.
 
@@ -418,7 +418,7 @@ explicitement incompatible avec le choix fait refuser l’enregistrement.
 
 | Périmètre | Vérification prévue |
 | --- | --- |
-| Domaine et parcours | Le backend produit les textes à partir de la condition stockée. Animation saisit et relit le choix. Pro et Live restituent les consignes et le règlement fournis par le serveur. Le [contrat du moteur Passeport](../moteur-animation/localeo_animation_engine_spec.md#431-configuration-et-invariants-du-passeport) conserve la qualification actuelle. |
+| Domaine et parcours | Le backend produit les textes à partir de la condition stockée. Animation saisit et relit le choix. Pro et Live restituent les consignes et le règlement fournis par le serveur. Le [contrat du moteur Passeport](../epic-55-moteur-animation/localeo_animation_engine_spec.md#431-configuration-et-invariants-du-passeport) conserve la qualification actuelle. |
 | Données et démonstration | Le choix est stocké dans les règles JSON de la configuration existante. Tester la lecture d’une configuration ancienne, la conservation des instantanés déjà publiés et la cohérence des textes d’un Passeport démo avec sa condition. |
 | Guides | Actualiser les guides Animation et Commerçant et leurs copies distribuées. Le premier décrit le réglage dans le portail et le second précise ce que le commerçant vérifie au moment de valider. |
 | Exploitation | Livrer le backend puis le portail Animation et le guide embarqué de Localeo Pro. Vérifier deux Passeports avec les deux conditions et comparer l’invitation à la fiche et au règlement publics après publication sur un environnement de recette. |

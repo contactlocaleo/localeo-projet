@@ -7,9 +7,9 @@ Date : **19 septembre 2026**. Politique technique : `moteur-animation-conservati
 ## 1. Références et périmètre
 
 - [Annexe A — registre simplifié et tableau de conservation, V1 du 13 septembre 2026](<Annexe A - Registre simplifié des traitements et tableau de conservation des données - V1.pdf>), pages 4–6 : fichiers temporaires, participants Animation, notifications, preuves, archives, gels et sauvegardes.
-- [Spécification du moteur, §11.3](../../specifications/moteur-animation/localeo_animation_engine_spec.md#113-conservation--règles-documentaires-existantes-et-compléments) : catégories propres au moteur et à la génération.
-- [Conception technique, §8.2 et précisions T6-R01 à T6-R11](../../specifications/moteur-animation/conception-technique.md#82-conservation-et-purge) : calcul des échéances, protections et reprise.
-- [Procédure d’exploitation du moteur, §4–5](../../specifications/moteur-animation/exploitation-moteur.md#4-conservation-quotidienne) : activation, ordonnanceur, rapports et gels.
+- [Spécification du moteur, §11.3](../../specifications/epic-55-moteur-animation/localeo_animation_engine_spec.md#113-conservation--règles-documentaires-existantes-et-compléments) : catégories propres au moteur et à la génération.
+- [Conception technique, §8.2 et précisions T6-R01 à T6-R11](../../specifications/epic-55-moteur-animation/conception-technique.md#82-conservation-et-purge) : calcul des échéances, protections et reprise.
+- [Procédure d’exploitation du moteur, §4–5](../../specifications/epic-55-moteur-animation/exploitation-moteur.md#4-conservation-quotidienne) : activation, ordonnanceur, rapports et gels.
 
 Le périmètre couvre Passeport, Tombola et Chasse : génération éditoriale, fichiers préparés, essais joueurs, accès personnels, participants, notifications Animation et reçus de participation. Les notifications Live, le carnet local, les pièces comptables et les preuves de tirage/gain gardent leurs catégories propres de l’Annexe A. La suppression locale du carnet ne supprime pas les participations serveur.
 
@@ -72,7 +72,7 @@ Les sauvegardes restent réservées à la continuité du service et suivent leur
 
 ## 6. État de vérification
 
-Les preuves locales de domaine, PostgreSQL jetable et interface ERP sont recensées dans le [suivi d’implémentation](../../specifications/moteur-animation/suivi-implementation.md). Elles couvrent notamment courses de gel/réutilisation/purge, reprises de stockage, archives nécessaires et protection des preuves. La [recette transversale](../../specifications/moteur-animation/recette-pilote.md) vérifie aussi une prolongation réelle suivie du gel/tirage : aucune purge à l’ancienne échéance, puis suppression des essais à la nouvelle fin +90 jours sans altération des preuves, population ou gains.
+Les preuves locales de domaine, PostgreSQL jetable et interface ERP sont recensées dans le [suivi d’implémentation](../../specifications/epic-55-moteur-animation/suivi-implementation.md). Elles couvrent notamment courses de gel/réutilisation/purge, reprises de stockage, archives nécessaires et protection des preuves. La [recette transversale](../../specifications/epic-55-moteur-animation/recette-pilote.md) vérifie aussi une prolongation réelle suivie du gel/tirage : aucune purge à l’ancienne échéance, puis suppression des essais à la nouvelle fin +90 jours sans altération des preuves, population ou gains.
 
 Ces vérifications ne déclarent ni migrations appliquées en exploitation, ni ordonnanceur activé, ni purge ou restauration réalisée sur un environnement déployé. Les contrôles de cible restent à consigner avant ouverture.
 

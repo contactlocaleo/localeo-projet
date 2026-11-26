@@ -39,7 +39,7 @@ Les cinq parcours examinés sont : découvrir les animations d’une commune, re
 
 Repères de lecture : Marketplace au commit `ad5c4d92e1b82d57239e3ca95d7d7ee2ba57f5e6` ; Projet au commit `8b20cf9bd8853270aed0df76b20c0800943794c4`, avec des travaux documentaires locaux préexistants conservés. Ces références ne décrivent pas une version déployée. Aucun gain de temps ou de réussite n’a été mesuré.
 
-Références canoniques : [principes UX Live](../../produit/live/principes-ux.md), [entrée unique et évolutions E73](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md), [inscriptions multiples](../../specifications/epic-42-localeo-live/inscriptions-multiples.md), [tombola publique E74](../../specifications/epic-74-tombola-publique/README.md), [moteur et protocole de reprise](../../specifications/moteur-animation/conception-technique.md), [lots et remises](../../specifications/epic-73-animation-et-ou-coffrets/gestion-lots-remises.md). Les décisions récentes de ces sources priment sur leurs compositions historiques.
+Références canoniques : [principes UX Live](../../produit/live/principes-ux.md), [entrée unique et évolutions E73](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md), [inscriptions multiples](../../specifications/epic-42-localeo-live/inscriptions-multiples.md), [tombola publique E74](../../specifications/epic-74-tombola-publique/README.md), [moteur et protocole de reprise](../../specifications/epic-55-moteur-animation/conception-technique.md), [lots et remises](../../specifications/epic-73-animation-et-ou-coffrets/gestion-lots-remises.md). Les décisions récentes de ces sources priment sur leurs compositions historiques.
 
 ## 2. Décisions validées et exigence de conformité
 

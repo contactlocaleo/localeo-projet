@@ -6147,8 +6147,8 @@ Les [critères PA-01 à PA-03](perimetres-parcours-saas.md#évolution-du-25-nove
   et 1 280 px. La recette Chasse complète échoue ensuite sur la visibilité du
   champ « Nom de la chasse » après l’ouverture d’Organisation et lots. Le
   même échec est reproduit avec la recette et un build antérieurs à l’évolution.
-- **PA-03**. Toutes les pages du guide Animation ont été rendues et relues. Les
-  signets, la copie embarquée et l’accès au PDF depuis Animation
+- **PA-03**. Les 25 pages du guide Animation ont été rendues et relues. Les
+  liens du sommaire, la copie embarquée et l’accès au PDF depuis Animation
   ont été vérifiés avec `pnpm guide:check` et `animation-guide.mjs --access-only`.
   La mise à jour du guide porte sur le parcours organisateur dans Animation.
 

@@ -11,7 +11,7 @@
 - Identifiant `75` vérifié dans la documentation commune et les noms de fichiers
   des dépôts applicatifs ; aucun cadrage de mots croisés existant retrouvé.
 - [Roadmap commune](../README.md), [cycle d’epic](../../organisation/cycle-epic.md).
-- Socles : [E55 — moteur et chasse au trésor](../../specifications/moteur-animation/README.md),
+- Socles : [E55 — moteur et chasse au trésor](../../specifications/epic-55-moteur-animation/README.md),
   [E73 — Animation et/ou Coffrets](../../specifications/epic-73-animation-et-ou-coffrets/README.md),
   [E42 — Live](../../specifications/epic-42-localeo-live/README.md).
 - Périmètre distinct : une nouvelle mécanique de jeu et une nouvelle offre

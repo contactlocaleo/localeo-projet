@@ -2,6 +2,80 @@
 
 [Spécification V1](README.md), [backlog canonique](../../roadmap/en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md). **Implémentation locale et vérification en cours**. Le bilan ci-dessous distingue les tests réalisés des réserves. Aucun import réel ni envoi fournisseur. Les sections historiques de spécification restent datées. La carte reste en V1 sur confirmation utilisateur ; CSV standard seul et report de CA-24 (import spécifique Gironde) sont également confirmés.
 
+<a id="verification-cloture-20261125"></a>
+
+## Vérification de clôture — 24 et 25 novembre 2026
+
+**L’EPIC 71 reste « En cours ».** Vérification menée à la demande du 24 novembre
+de clôturer l’epic. Le périmètre compte 83 critères actifs et CA-24 reporté. Les
+preuves sont rattachées à la [matrice du socle](#matrice-de-traçabilité), aux
+bilans des extensions et au [workshop du 19 novembre](#workshop-crm-20261118).
+La dernière réalisation CRM est `46cc8904` dans Backend. La vérification part
+de Backend `2c0b0826` et de Projet `65bad04` avec les travaux locaux présents.
+
+| Critères et code | Preuve disponible | Reste avant validation |
+| --- | --- | --- |
+| CA-06/26/27, préparation et remise. `ServiceRappelsCRM`, `DepotRappelsCRM` et composition `rappels_crm`, appelée par le batch d’exploitation | **Échec du rejeu local** sur les deux délais. Le [banc historique](#résultat-final-des-rappels) relevait 124,666 s pour préparer 99 % des intentions et 235,753 s pour 10 000 remises simulées. Le worker isolé atteignait **84,31 Mio RSS** dès l’import sous Windows. | Prouver la préparation et la remise dans les budgets de 120 s et 600 s et un pic de RSS absolu de 64 Mio au plus par worker isolé sur une cible Linux représentative. |
+| CA-07/08–15/22/38/40/49/59/77, lectures et traitements. Dépôts de prospection, agrégats, imports, actualisation et qualification | Import nominal isolé de 10 000 lignes en **84,043 s**, dépôt en **0,576 s**, mémoire additionnelle **11 Mio**. Carte et tableau de bord vérifiés jusqu’à 100 000 prospects et 20 lecteurs en persistance seule, sur la fixture de socle sans projections de qualification. Les filtres du workshop ont leur propre mesure à 10 000. | Exécuter le [protocole HTTP N/10N](architecture-contrats.md#performance--budgets-de-conception-non-mesures) sur une cible jetable dimensionnée, aux paliers 1/5/10/20, avec notes, imports, rappels et traitements de qualification. Relever les percentiles par opération, le RSS, les verrous et le retour à la normale. |
+| CA-03/19/79, recette de gain UX-15. PWA privée et contrôles des droits CRM | L’audit a relevé une interruption d’accès sur un dossier visible avec un compte nominatif. Les preuves locales de droits et de sélection sont documentées par E71-EVOL-10 et le workshop. | Diagnostiquer l’interruption puis rejouer le gain avec un compte nominatif sur TEST lorsque la recette de livraison est autorisée. [Recette UX](ux-productivite.md#l4--choisir-la-bonne-cible-sans-identifiant-technique) |
+
+### Contrôles renouvelés
+
+- `node tests/browser/crm-workshop.cjs` réussi sur le shell CRM de l’arbre
+  local Backend, API synthétique et port éphémère. Rapport
+  `tmp/crm-workshop-QKWRgj/resultat.json`.
+- `scripts/documentation/generate_epic71_openapi.py` exécuté hors ligne vers
+  un fichier temporaire. Les 81 chemins, les 139 schémas et les mécanismes de
+  sécurité correspondent au JSON canonique. La dépendance WebAuthn requise par
+  les travaux locaux E83 a été chargée depuis un dossier de contrôle temporaire
+  et vérifiée contre les empreintes de `requirements.txt`.
+- `tests/integration/test_crm_rappels_performance.py::test_10k_rappels_deux_workers_concurrents`
+  exécuté via le lanceur isolé sur Backend `2c0b0826` commité, Windows 11,
+  Python 3.14.3, PostgreSQL 18.3 local jetable, fenêtre de 58 s, cadence de
+  60 s, e-mail et WebPush simulés. Après **419,10 s**, 19 126 intentions sur
+  20 000 étaient préparées. La cible de 99 % en 120 s est dépassée. À
+  **599,54 s**, 3 541 rappels sur 10 000 étaient remis. Le test s’arrête en
+  échec au passage suivant, à **659,49 s**, avec **4 765 remises** et toutes
+  les intentions préparées. L’arrêt par le budget de remise précède les
+  assertions finales. Le RSS est celui du processus de test partagé. Le
+  rejeu porte sur le poste local, et le budget absolu du worker Linux reste
+  à vérifier. Sur ce poste, WSL a échoué au démarrage
+  (`HCS_E_CONNECTION_TIMEOUT`). Rapports
+  `tmp/e71-cloture-20261125-351ab3eb/rappels-performance.json`
+  et `rappels-performance-final.xml` dans Backend.
+- Suite CRM via `scripts/validation/test_isolated.py` sur l’arbre de travail
+  Backend, avec le même PostgreSQL jetable. **769 réussites, zéro échec et
+  zéro skip**, 32 avertissements de dépréciation de l’adaptateur datetime
+  SQLite dans les tests PWA. Scénarios de domaine, application, API, droits,
+  rappels, import, qualification, agenda, migration et restauration des
+  fixtures CRM, génération synthétique, PWA et lecteur documentaire.
+  Rapport JUnit `tmp/e71-cloture-20261125-351ab3eb/functional-final.xml`
+  dans Backend.
+
+Les guides utilisateur Commerçant et Animation ont été examinés. Le CRM est une
+PWA interne servie par Backend avec ses propres droits et guides. Ses liens vers
+les objets métier ouvrent les destinations déjà prévues dans les deux
+applications. Leurs guides couvrent leurs parcours propres. Les API privées
+servent la PWA du Backend. Les jeux et restaurations CRM passent par le
+générateur de Backend avec des données synthétiques.
+
+### Configuration de livraison
+
+| Composant | Action et ordre | Valeur ou contrôle |
+| --- | --- | --- |
+| PostgreSQL cible | Sauvegarder, vérifier le journal et appliquer les migrations manquantes avec `scripts/database/apply_migrations.py` avant le backend. | Chaîne CRM `v290–v302`, `v305`, `v311/v312`, `v314` incluse dans l’ordre global du dépôt. Vérifier le schéma avec `LOCALEO_SCHEMA_READINESS_ENFORCE=true`. |
+| Backend et documentation | Livrer une révision Backend validée avec le bundle généré à partir du commit Projet qui portera ce lot. Vérifier les empreintes, la santé, l’accès ERP et le guide CRM. | Alias `docs/ops/crm/`. Publier le SHA Projet issu du futur commit et vérifier la version Backend affichée sur la cible. |
+| Accès et carte | Rattacher le domaine de la cible, vérifier CNAME et HTTPS, compléter `LOCALEO_TRUSTED_HOSTS`, renseigner `CRM_PUBLIC_ORIGIN` et `CRM_PUBLIC_URL`, puis attribuer les capacités ERP CRM. | Origines de chaque environnement et paramètres `CRM_MAP_TILE_URL` / `CRM_MAP_ATTRIBUTION` dans le [guide d’exploitation](exploitation.md#domaine-dédié). Vérifier accès nominatif, lecture seule, refus, navigation profonde, installation PWA et carte avec repli liste. |
+| Batchs et activation | Vérifier l’ordonnanceur des imports et de la qualification. Configurer séparément la collecte et les rappels voulus après recette et décision ARB-07 pour les données réelles. | Drapeaux CRM désactivés par défaut. Manifeste privé `LOCALEO_CRM_REFERENTIEL_MANIFEST` si utilisé, clé interne de portée `internal:batch`, `CRM_WEBPUSH_VAPID_PRIVATE_KEY` pour WebPush et `BREVO_EMAIL_API_KEY` pour l’e-mail si activés. Rappels chaque minute avec deux workers au plus. [Paramètres et reprise](exploitation.md#traitements-périodiques) |
+
+En reprise, désactiver les canaux de rappel puis le CRM et suspendre les
+déclencheurs concernés. Conserver les états persistés et diagnostiquer les
+remises déjà engagées avant reprise. L’import distant, l’activation, le commit,
+le push et le déploiement sont des opérations distinctes. Le lot documentaire
+proposé porte ce bilan, le lien depuis le backlog et les deux corrections de
+`LOCALEO_CRM_REFERENTIEL_MANIFEST`. Message proposé
+`docs(E71): consigner la vérification de clôture et ses réserves`.
+
 ## Correctif du 12 novembre 2026 — afficher seulement la note corrigée
 
 Demande : après modification d'une note, **Historique des échanges** doit afficher

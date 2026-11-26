@@ -23,6 +23,8 @@ Utiliser [localeo-creer-epic](../../.agents/skills/localeo-creer-epic/SKILL.md) 
 
 Utiliser [localeo-specifier-epic](../../.agents/skills/localeo-specifier-epic/SKILL.md). Enrichir d'abord le document canonique dans l'[index des spécifications](../specifications/INDEX.md), avec le [modèle d'architecture](../architecture/templates/epic-architecture-template.md) lorsque sa profondeur est utile.
 
+Le dossier d’une spécification dédiée porte l’identifiant complet de l’epic en préfixe, en minuscules et avec des tirets, par exemple `docs/specifications/epic-83-cles-acces-localeo-pro/`. Pour un identifiant applicatif, conserver son namespace, par exemple `epic-marketplace-54-identite-visuelle/`. Lier le README du dossier depuis le backlog et l’index. Les dossiers transverses gardent un nom qui décrit leur sujet.
+
 La conception rapproche le comportement existant vérifié et le comportement cible. Identifier les invariants et leur propriétaire selon la [matrice d'architecture](../architecture/transverse/controle-architecture.md), puis les entrées API, ERP, batch et interfaces réellement affectées. Décrire les transitions autorisées et refusées, les permissions et les effets secondaires. Examiner concurrence, répétition, reprise après échec et audit selon le risque.
 
 Un contrat partagé indique son producteur, sa source canonique, ses générateurs et consommateurs. La spécification précise la compatibilité avec les données et versions existantes, les migrations nécessaires et l'ordre de livraison lorsque les applications ne peuvent évoluer indépendamment. Ne pas inventer de compatibilité ascendante ni de migration réversible sans preuve.

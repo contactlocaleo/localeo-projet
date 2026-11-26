@@ -279,7 +279,7 @@ ni tirage, ni attribution, ni fin `TERMINEE`, ni archivage.
 | Rapport organisateur | Mesures agrégées et bilan PDF disponibles, mais aucun e-mail de clôture préparé | Créer un rapport intermédiaire daté, distinct du bilan final |
 
 Les règles de modification de période restent celles du
-[moteur, T6-QA02 et T6-E06](../moteur-animation/conception-technique.md#précisions-t6--exploitation-et-vérification).
+[moteur, T6-QA02 et T6-E06](../epic-55-moteur-animation/conception-technique.md#précisions-t6--exploitation-et-vérification).
 Les trois arbitrages suivants ont été **confirmés par l’utilisateur le
 12 novembre 2026**. Les précisions techniques en découlent sans ajouter de
 réouverture après échéance au comportement du moteur.

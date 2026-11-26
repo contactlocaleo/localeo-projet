@@ -290,7 +290,7 @@ purge les brouillons privés et ne réaffiche pas une ancienne réponse tardive.
 
 Étendre `CONTRATS`, le registre exporté et le filtre Pro (qui ne reprend pas
 automatiquement tous les moteurs). Live ne possède pas d'OpenAPI complet embarqué
-à inventer. Le dossier documentaire `moteur-animation/contrats/` n'est pas le
+à inventer. Le [dossier documentaire des contrats E55](../epic-55-moteur-animation/contrats/README.md) n'est pas le
 producteur des manifestes de production. Cette phase ne génère ni ne modifie un
 contrat machine annonçant des routes E78 inexistantes.
 
@@ -330,7 +330,7 @@ sans campagne commerciale ni accès nominatif nouveau induit par ce jeu.
 La réponse définitive suit la conservation de sa participation, comme
 [E77](../epic-77-juste-prix-local/architecture-contrats.md), avec séparation des
 coordonnées et des preuves prévue dans la
-[conception du moteur](../moteur-animation/conception-technique.md).
+[conception du moteur](../epic-55-moteur-animation/conception-technique.md).
 Ne pas assimiler automatiquement cette réponse à un détail d'essai Chasse
 purgeable à 90 jours. Ajouter explicitement tables, fichiers privés, gels,
 anonymisation et exports autorisés à la politique commune, sans nouveau délai E78

@@ -4,7 +4,7 @@
 
 - **EPIC 83 — Clés d’accès dans Localeo Pro**, [spécification et preuves locales](epic-83-cles-acces-localeo-pro/README.md). Connexion WebAuthn et activation par environnement dans Localeo Ops.
 
-- **EPIC 82 — Scan QR depuis l’appareil photo avec Localeo Pro**, [conception et recette](epic-82-scan-qr-externe-localeo-pro/README.md). Coffret, participant Animation et bon numérique, confirmation explicite et scanner historique préservé.
+- **EPIC 82 — Scan QR depuis l’appareil photo avec Localeo Pro**, terminée sur TEST le 24 novembre 2026. Coffret, participant Animation et bon numérique, confirmation explicite et scanner historique préservé. [Conception et bilan](epic-82-scan-qr-externe-localeo-pro/README.md)
 
 - **EPIC 76 — Sessions support dans Localeo Pro et Animation**, [spécification](epic-76-impersonification-support-pro-animation/README.md). Accès ERP et Localeo Support, import de commerçants comme recette transverse, historique client et garde-fous de sécurité et de charge.
 
@@ -23,6 +23,8 @@
 Mise à jour : **18 septembre 2026**. Les documents sont regroupés par fonctionnalité et EPIC ; les contributions backend et interfaces partagent le même dossier.
 
 Commencer par le README du sujet, puis consulter ses règles, contrats et arbitrages. Les états ci-dessous reprennent le classement de la [roadmap commune](../roadmap/README.md). Les bilans datés et les anciennes tâches à réaliser restent des éléments historiques : ce rangement ne vaut pas nouvelle recette ni nouveau développement.
+
+Les dossiers dédiés portent l’identifiant complet de leur epic en préfixe. Voir la [convention de nommage du cycle d’epic](../organisation/cycle-epic.md#spécifier).
 
 ## Priorités en cours et à cadrer
 
@@ -76,7 +78,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 - **Terminée : EPIC 66**, [Localeo Atelier](epic-66-localeo-atelier/README.md), V1.2 du 29 septembre 2026 implémentée localement : PWA, prix AUTO/MANUEL et prompt expérience ; 23 critères avec traçabilité, clôture produit confirmée le 1er octobre 2026 ; réserves techniques de livraison dans le bilan.
 - **Terminée : EPIC 65**, [vues ERP audit, paiements et reversements](epic-65-vues-erp/README.md), V1.4 clôturée le 2 octobre 2026 ; dix critères vérifiés, droits E69 intégrés ; bilan des tests et configuration de livraison.
 - **Terminée : EPIC 69**, [accès ERP et satellites](epic-69-acces-internes/README.md), V1.4 clôturée le 2 octobre après correction CA-18 : scopes globaux, invitation/récupération, Finance et exceptions Backoffice. Les 27 critères sont conservés ; preuves, migration v253 et configuration de livraison dans le bilan, sans déploiement implicite.
-- **En cours : EPIC 55**, [moteur commun et chasse au trésor](moteur-animation/README.md) ; [évolution après audit Animation/ERP/Live du 13 novembre 2026](moteur-animation/suivi-implementation.md#e55-audit-20261113-implementation) implémentée localement, avec preuves et limites de capacité/pilote au bilan.
+- **En cours : EPIC 55**, [moteur commun et chasse au trésor](epic-55-moteur-animation/README.md) ; [évolution après audit Animation/ERP/Live du 13 novembre 2026](epic-55-moteur-animation/suivi-implementation.md#e55-audit-20261113-implementation) implémentée localement, avec preuves et limites de capacité/pilote au bilan.
 - **En cours : EPIC 68**, [processus d'onboarding commerçant](epic-68-preparation-onboarding/README.md), V1.2 implémentée localement : sept étapes du référencement à la finalisation ; espace sans dépôt, contrat imprimable avant J, signature jour J et dépôt interne ; confirmation avant chaque séquence mail/SMS. Paramètres validés, guide ERP et supports ; preuves et livraison test suivies dans le bilan.
 - **À faire :** [EPIC 54 — Calendrier de l'Avent](epic-54-calendrier-avent-local/README.md) et [EPIC 58 — Filtre annuel](epic-58-filtre-annuel-global/README.md).
 - Cadrage encore porté par la roadmap : [EPIC 62 — Validation des modifications de prestations](../roadmap/a-faire/epic-62-validation-modifications-prestations-backlog.md), [EPIC 64 — Rétractation](../roadmap/a-faire/epic-64-parcours-retractation-en-ligne-backlog.md) et [EPIC-MARKETPLACE-54 — Identité visuelle](../roadmap/a-faire/epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md). Aucun dossier de spécification détaillée supplémentaire n'est créé sans contenu.
@@ -95,6 +97,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 
 | EPIC | Dossier | État produit | Applications concernées |
 | --- | --- | --- | --- |
+| 10 | [Authentification commerçant par mot de passe](epic-10-authentification-commercant/README.md) | Terminée | Backend, Commerçant |
 | 41 | [Plateforme Animation, actualités et flyers](epic-41-api/README.md) | Terminée | Backend, Animation, Commerçant, Marketplace / Live |
 | 42 | [Localeo Live, carnet et inscriptions](epic-42-localeo-live/README.md) | Terminée | Backend, Marketplace / Live |
 | 45 | [Vision 360 Animation](epic-45-vision-360-animation/README.md) | Terminée | Backend, Animation |
@@ -107,7 +110,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 | 52 | [Accueil géolocalisé](epic-52-accueil-marketplace-geolocalise/README.md) | Terminée | Backend, Marketplace |
 | 53 | [Tombola et catalogue de modèles](epic-53-tombola-locale/README.md) | Terminée | Backend, Animation, Live |
 | 54 | [Calendrier de l’Avent](epic-54-calendrier-avent-local/README.md) | À faire | Backend, Animation, Live |
-| 55 | [Moteur commun, DSL et chasse au trésor](moteur-animation/README.md) | En cours | Backend et trois interfaces ; évolution audit Animation/ERP/Live implémentée localement, capacité cible et pilote à qualifier |
+| 55 | [Moteur commun, DSL et chasse au trésor](epic-55-moteur-animation/README.md) | En cours | Backend et trois interfaces ; évolution audit Animation/ERP/Live implémentée localement, capacité cible et pilote à qualifier |
 | 56 | [Participation des commerçants](epic-56-validation-participation-commercants-animation/README.md) | Terminée | Backend, Animation, Commerçant |
 | 57 | [Catalogues publics et pagination](epic-57-bornage-pagination-api-marketplace/README.md) | Terminée | Backend, Marketplace |
 | 58 | [Filtre annuel global](epic-58-filtre-annuel-global/README.md) | À faire | Backend, Animation |
@@ -125,10 +128,9 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 | 74 | [Tombola publique sans commerçant](epic-74-tombola-publique/README.md) | En cours | Backend/ERP, Animation, Marketplace/Live ; Pro pour remise et non-régression |
 | 75 | [Mots croisés assistés par l’IA](epic-75-mots-croises-assistes-ia/README.md) | À faire | Backend/ERP, Animation, Marketplace/Live, Pro ; préparation OnBoard et exploitation partagées |
 | 77 | [Le Juste Prix Local](epic-77-juste-prix-local/README.md) | En cours | Backend/ERP, Animation, Commerçant, Marketplace/Live ; démonstration et exploitation |
-
 | 78 | [Le jeu des vitrines](epic-78-jeu-des-vitrines/README.md) | En cours | Backend/ERP, Animation, Commerçant, Marketplace/Live ; démonstration et exploitation |
 | 81 | [Clarté des parcours publics Marketplace](epic-81-parcours-ux-marketplace/README.md) | À faire | Marketplace/Live ; backend pour contrats et recette achat, contenu éditorial conditionnel |
-| 82 | [Scan QR depuis l’appareil photo avec Localeo Pro](epic-82-scan-qr-externe-localeo-pro/README.md) | À faire | Backend, Commerçant, Animation et Live pour les supports QR |
+| 82 | [Scan QR depuis l’appareil photo avec Localeo Pro](epic-82-scan-qr-externe-localeo-pro/README.md) | Terminée sur TEST le 24 novembre 2026 | Backend, Commerçant, Marketplace et Live pour les supports QR |
 | 83 | [Clés d’accès dans Localeo Pro](epic-83-cles-acces-localeo-pro/README.md) | En cours | Backend Identité et accès, Localeo Pro, Localeo Ops |
 | 84 | [Adhérents hors commune dans Localeo Animation](epic-84-adherents-hors-commune-animation/README.md) | En cours | Backend, Animation, Commerçant et Marketplace/Live |
 | 85 | [Parcours organisateur dans Localeo Animation](epic-85-parcours-organisateur/README.md) | En cours | Animation et backend ERP |

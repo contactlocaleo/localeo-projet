@@ -15,8 +15,8 @@ Vision fonctionnelle, parcours, identité visuelle et formations.
 - [formation/backend/guide-animation-preproduction.md](formation/backend/guide-animation-preproduction.md)
 - [formation/backend/guide-backoffice-localeo.md](formation/backend/guide-backoffice-localeo.md)
 - [formation/commercant/guide-commercant.md](formation/commercant/guide-commercant.md)
-- [Guide quotidien Commerçant : source éditable](formation/commercant/guide-quotidien-commercant.md) et [PDF illustré accessible depuis l’application](../../livrables/formation/commercant/guide-quotidien-localeo-commercant.pdf), édition du 21 novembre 2026.
-- [Guide quotidien Animation : source éditable](formation/animation/guide-quotidien-animation.md) et [PDF illustré accessible depuis l’application](../../livrables/formation/animation/guide-quotidien-localeo-animation.pdf), édition du 21 novembre 2026.
+- [Source du guide quotidien Localeo Pro](formation/commercant/guide-quotidien-commercant.md) et [PDF illustré avec sommaire des gestes métier](../../livrables/formation/commercant/guide-quotidien-localeo-commercant.pdf), édition du 25 novembre 2026.
+- [Source du guide quotidien Localeo Animation](formation/animation/guide-quotidien-animation.md) et [PDF illustré avec sommaire des gestes métier](../../livrables/formation/animation/guide-quotidien-localeo-animation.pdf), édition du 25 novembre 2026.
 - [Maintenir les deux guides avec chaque évolution](../organisation/maintenance-guides-utilisateurs.md).
 - [identite-visuelle/marketplace/hero-centre-bourg.md](identite-visuelle/marketplace/hero-centre-bourg.md)
 - [identite-visuelle/marketplace/hero-fromager.md](identite-visuelle/marketplace/hero-fromager.md)

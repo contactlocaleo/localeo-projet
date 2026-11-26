@@ -77,7 +77,7 @@ l'abandon de l'ancienne carte QR commerçant.
 Réutiliser les règles de consommation et de reversement ; ne pas créer un second
 moteur de validation. Le droit client requis doit être cartographié précisément :
 une référence publique ou un identifiant de coffret seul ne suffit pas.
-Pour l'animation, réutiliser les règles du [moteur d'animation](../../specifications/moteur-animation/localeo_animation_engine_spec.md),
+Pour l'animation, réutiliser les règles du [moteur d'animation](../../specifications/epic-55-moteur-animation/localeo_animation_engine_spec.md),
 notamment éligibilité, progression et récompenses : le PIN permet exactement les mêmes
 validations terrain que le scan QR commerçant, avec les mêmes conditions et effets,
 sans administration. La spécification cartographiera les contrats et droits participant correspondants.

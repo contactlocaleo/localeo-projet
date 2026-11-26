@@ -7,11 +7,13 @@
 six orientations, 18 critères ; [spécification et réalisation locales](../../specifications/epic-73-animation-et-ou-coffrets/workshop-live-20261118.md),
 recette humaine ouverte, sans réouverture de l'EPIC 73.
 
-64 EPIC terminées : 62 du tronc commun et deux identifiants applicatifs
+65 EPIC terminées, dont 63 du tronc commun et deux identifiants applicatifs
 (EPIC-MARKETPLACE-18 et EPIC-PRES-CONTENU-001). Les EPIC 3 et 4 restent décrites
-dans la roadmap produit ; les 62 autres disposent chacune d'un fichier ci-dessous.
+dans la roadmap produit. Les 63 autres disposent chacune d'un fichier ci-dessous.
 Les compléments de conception, de tests et d'interface sont réunis dans leur backlog.
 Les recettes d'environnement restantes ne modifient pas ce classement.
+
+- [EPIC 82 — Scanner un QR client depuis l’appareil photo avec Localeo Pro](epic-82-scan-qr-externe-localeo-pro-backlog.md) · Terminée le 24 novembre 2026 après validation sur TEST. Le bilan couvre les sept critères, dont le maintien du scanner historique. [Bilan E82](../../specifications/epic-82-scan-qr-externe-localeo-pro/README.md#clôture-sur-test-le-24-novembre-2026)
 
 - [EPIC 73 — Localeo Animation et/ou Coffrets](epic-73-animation-et-ou-coffrets-backlog.md) : clôture technique le 1er novembre 2026 selon E73-DEC-CLOTURE-TESTS ; 63 critères et extensions raccordés aux preuves dans le [bilan](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md). Activation et pilote suivis séparément.
 

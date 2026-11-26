@@ -19,14 +19,55 @@ capture, synchroniseurs et tests restent dans leur dépôt applicatif. La copie
 publique est un livrable généré, jamais une seconde source éditoriale. Ne pas
 modifier une ancienne édition pour faire disparaître son caractère historique.
 
+## Rédiger par geste métier
+
+- **Partir du besoin de la personne.** Lister les gestes qu’un gestionnaire
+  Animation ou un commerçant doit pouvoir réaliser. Pour chaque geste, choisir
+  un titre avec un verbe et un résultat concret, comme « Publier une animation »
+  ou « Valider la prestation d’un client ». Regrouper les gestes selon le
+  déroulement du travail, de la prise en main aux tâches du quotidien.
+- **Donner un sommaire dès l’ouverture.** Afficher le sommaire dans les
+  premières pages du PDF, avec les titres des gestes et un repère de page
+  ou un lien vers chaque section. Aligner l’ordre et les intitulés du sommaire
+  sur les sections. Conserver les signets du PDF en complément.
+  Les générateurs reprennent les titres Markdown de forme `## N · Titre`.
+  Pour ouvrir un groupe dans le sommaire, placer le commentaire
+  `<!-- Sommaire : Nom du groupe -->` juste avant son premier geste.
+- **Expliquer et illustrer chaque geste.** Indiquer ce que la personne va
+  accomplir, où commencer et ce qu’elle doit avoir sous la main si nécessaire.
+  Décrire le cas habituel étape par étape. Placer une ou plusieurs captures
+  réelles près des actions qu’elles éclairent, avec une légende qui indique
+  quoi repérer ou vérifier. Terminer le parcours par le signe visible qui
+  confirme le résultat.
+- **Employer les mots du quotidien.** S’adresser directement à la personne,
+  avec des phrases courtes et les libellés affichés pour les menus, boutons et
+  états. Expliquer les termes métier indispensables à leur première apparition
+  et laisser les détails d’implémentation dans les documents techniques.
+- **Placer les variantes après le cas habituel.** Ajouter les autres façons
+  de faire, les options avancées ou les difficultés courantes quand elles
+  aident à agir. Dire dans quelle situation elles s’appliquent et quelle
+  action entreprendre. Indiquer dès le départ tout prérequis indispensable
+  au parcours habituel.
+
+### Relire comme une personne qui découvre Localeo
+
+Ouvrir le PDF en se plaçant dans la situation d’un nouveau gestionnaire
+Animation ou d’un nouveau commerçant. Parcourir d’abord le sommaire et
+chercher des tâches concrètes de la journée. Les titres doivent permettre de
+reconnaître les gestes essentiels et de trouver la bonne page sans connaître
+les menus de l’application. Suivre ensuite le parcours habituel du geste
+traité dans l’interface en s’aidant du texte et des captures. Vérifier que le
+point de départ, chaque action et le résultat attendu se comprennent sans
+explication orale. Corriger les gestes difficiles à trouver et les étapes
+ambiguës avant de valider le guide.
+
 ## Actualiser et vérifier
 
 1. Comparer le parcours décrit avec le comportement réellement livré et ses
    spécifications courantes. Décrire les fonctions conditionnelles selon les
    droits et services activés ; une évolution prévue reste hors du guide courant.
-2. Corriger les étapes, résultats attendus, repères d’état et conseils utiles.
-   Employer les libellés visibles dans l’application. Donner à l’utilisateur
-   l’information nécessaire pour agir, sans détails d’implémentation.
+2. Corriger le geste concerné et son entrée dans le sommaire selon les règles
+   de rédaction ci-dessus.
 3. Recapturer les écrans affectés depuis la vraie interface avec des données
    fictives et des API locales simulées, ou un environnement explicitement
    autorisé. Ne pas dessiner un écran supposé. Exclure secrets, coordonnées
@@ -37,6 +78,8 @@ modifier une ancienne édition pour faire disparaître son caractère historique
    lisibilité : captures et légendes, sauts de page, polices, tableaux, liens,
    numérotation, absence de texte coupé ou superposé. Adapter la pagination au
    contenu plutôt que réduire les caractères jusqu’à les rendre illisibles.
+   Vérifier les destinations du sommaire et faire la relecture en situation
+   de découverte avant de synchroniser le PDF.
 5. Synchroniser la copie embarquée, vérifier son égalité avec le PDF canonique,
    puis vérifier le lien depuis l’application et le PDF réellement servi dans
    le build. Une modification du point d’accès exige une recette mobile,

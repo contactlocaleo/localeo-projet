@@ -2,7 +2,8 @@
 
 Règles de session, d'authentification et de liens de consultation. Le backend porte les contrôles ; les interfaces consomment leurs résultats.
 
-- [Authentification commerçant — EPIC 10](authentification-commercant.md)
+- [Authentification commerçant — EPIC 10](../epic-10-authentification-commercant/README.md)
+- [Clés d’accès dans Localeo Pro](../epic-83-cles-acces-localeo-pro/README.md)
 - [Session Bearer commerçant et limites](session-bearer-commercant.md)
 - [Révocation de session commerçant — BACK-001](revocation-session-commercant.md)
 - [Activation du gestionnaire Animation](activation-gestionnaire.md)

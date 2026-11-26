@@ -46,7 +46,7 @@ clôturer puis rejoindre les opérations de fin. Accès au compte et choix d’u
 modèle sont examinés comme points d’entrée.
 
 Références : [parcours SaaS E73](../../specifications/epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md),
-[conception du moteur](../../specifications/moteur-animation/conception-technique.md),
+[conception du moteur](../../specifications/epic-55-moteur-animation/conception-technique.md),
 [conventions de lecture locale](../../architecture/transverse/conventions-backoffice.md#recherche-et-actualisation-ciblée-des-résultats)
 et [audit du 12 novembre](localeo-animation-ux-productivite-2026-11-12.md).
 La roadmap indique les sept lots de productivité implémentés et AP-22 partiellement

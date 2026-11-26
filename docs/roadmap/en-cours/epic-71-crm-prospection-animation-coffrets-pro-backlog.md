@@ -3,6 +3,7 @@
 ## Références : socle E71-EVOL-03 et extensions E71-EVOL-04/05/06/07/08/09/10
 
 - État produit : **En cours**, selon la [roadmap commune](../README.md).
+- **25 novembre 2026 — vérification de clôture.** Le rejeu local dépasse les délais de préparation et de remise des rappels. La charge HTTP mixte et le scénario de gain sur TEST restent à vérifier. Voir le [bilan de clôture](../../specifications/epic-71-crm-prospection/verification-livraison.md#verification-cloture-20261125).
 - **19 novembre 2026 — E71-CADRAGE-AUDIT-20261118 :** [analyse et cadrage des suites de l’audit CRM](#audit-crm-20261118). Cinq orientations validées et réalisées localement, seuils UX02 à 30/60 jours ; [conception](../../specifications/epic-71-crm-prospection/workshop-crm-20261118.md) et [preuves](../../specifications/epic-71-crm-prospection/verification-livraison.md#workshop-crm-20261118).
 - Cadrage initial : 2 octobre 2026 ; décisions/imports E71-EVOL-01 et E71-EVOL-02 du 9 octobre ; **recadrage du 3 novembre 2026** à la demande utilisateur.
 - [Spécification canonique V1.6](../../specifications/epic-71-crm-prospection/README.md), [format d'import et gabarit](../../specifications/epic-71-crm-prospection/import-carte.md).

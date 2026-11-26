@@ -29,7 +29,7 @@ lots libres externes ou bons numériques, avec leurs prérequis habituels.
 | [Bilan de réalisation](bilan-realisation.md) | Implémentation locale, preuves, réserves et activation séparée |
 | [Vérification et livraison](verification-livraison.md) | Matrice des vingt critères, performance, démonstration et ordre de livraison |
 
-Socles : [moteur E55](../moteur-animation/README.md),
+Socles : [moteur E55](../epic-55-moteur-animation/README.md),
 [participation E56](../epic-56-validation-participation-commercants-animation/README.md),
 [Live E42](../epic-42-localeo-live/README.md),
 [offre E73](../epic-73-animation-et-ou-coffrets/README.md),

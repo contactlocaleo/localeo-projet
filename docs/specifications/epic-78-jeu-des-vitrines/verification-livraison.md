@@ -109,7 +109,7 @@ une correction ou une limite documentée avant activation, sans affaiblir les te
 ## Documentation, démonstration et données
 
 Lors de l'implémentation, actualiser le guide
-[d'exploitation Animation](../moteur-animation/exploitation-moteur.md),
+[d'exploitation Animation](../epic-55-moteur-animation/exploitation-moteur.md),
 l'[espace commerçant](../espace-commercant/README.md),
 [Live](../epic-42-localeo-live/README.md), le règlement et les kits, ainsi que les
 [procédures E73](../../exploitation/technique/configurer-epic-73.md).

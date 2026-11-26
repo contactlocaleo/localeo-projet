@@ -6,7 +6,7 @@
 
 **24 novembre 2026 — [EPIC 83, clés d’accès dans Localeo Pro](en-cours/epic-83-cles-acces-localeo-pro-backlog.md).** Critères CL-01 à CL-06. Parcours Pro et bascule Ops réalisés localement, recette sur appareils physiques et mise en service encore ouvertes.
 
-**24 novembre 2026 — [EPIC 82, scan QR depuis l’appareil photo avec Localeo Pro](a-faire/epic-82-scan-qr-externe-localeo-pro-backlog.md).** Critères E82-CA-01 à E82-CA-07. Ouverture directe après connexion éventuelle, confirmation explicite et non-régression de **Scanner**. État **À faire** selon la [roadmap commune](README.md).
+**24 novembre 2026 — EPIC 82, Terminée sur TEST.** Les critères E82-CA-01 à E82-CA-07 couvrent l’ouverture directe après connexion éventuelle, la confirmation explicite et la non-régression de **Scanner**. [Backlog E82](terminees/epic-82-scan-qr-externe-localeo-pro-backlog.md), [bilan de clôture](../specifications/epic-82-scan-qr-externe-localeo-pro/README.md#clôture-sur-test-le-24-novembre-2026)
 
 **E73-EVO-WORKSHOP-LIVE-20261118 — 18 novembre 2026** :
 [cadrage canonique des six orientations retenues](terminees/epic-73-animation-et-ou-coffrets-backlog.md#workshop-live-20261118),
@@ -27,16 +27,16 @@ Clôture E70 du **2 novembre 2026** : **Terminée**, 34 critères vérifiés sur
 
 E72 — accès salariés est terminée le 1er novembre 2026 selon E72-DEC-CLOTURE-TESTS : tests unitaires, d'intégration et fonctionnels des 22 critères vérifiés. Le [bilan E72](../specifications/epic-72-acces-salaries/verification-livraison.md) distingue la clôture technique des actions de mise en service. Aucun déploiement effectué.
 
-Mise à jour du classement : 2026-11-16 — E78 en cours ; historique du 6 novembre : (ajout des EPIC-77 à EPIC-79 à faire ; EPIC-55, EPIC-68, EPIC-71 et EPIC-74 en cours selon la roadmap commune ; clôtures historiques conservées)
+Le classement courant est dans la [roadmap commune](README.md). Le suivi des EPIC 77 à 79 remonte au 6 novembre 2026. L’EPIC 78 est passée en cours le 16 novembre.
 
 ## Synthese
 
 Évolution transverse du 29 septembre 2026 : [PWA-20260929 — installation et mise à jour](../specifications/installation-mise-a-jour-pwa.md), appliquée aux sept PWA existantes. Les états et clôtures historiques des EPIC restent inchangés ; preuves locales et recette appareil sont distinguées dans la spécification.
 
 - 88 identifiants EPIC suivis, dont 85 du tronc commun et 3 identifiants applicatifs distincts.
-- 9 EPIC à faire et 12 en cours.
+- 8 EPIC à faire et 12 en cours.
 - EPICs fusionnees : 1 (EPIC-61 vers EPIC-60).
-- EPICs terminees : 64 (62 du tronc commun et 2 applicatives) ; EPICs abandonnees : 2.
+- EPICs terminees : 65 (63 du tronc commun et 2 applicatives) ; EPICs abandonnees : 2.
 - US / PRD detaillees dans le tableau historique : 415, jusqu'a `EPIC-45`.
 - Source prioritaire : fichier backlog dedie quand disponible, sinon `product-roadmap.md`.
 - Référence de pilotage · [EPIC à faire](a-faire/README.md), [EPIC en cours](en-cours/README.md) et [EPIC terminées](terminees/README.md).
@@ -49,11 +49,11 @@ Mise à jour du classement : 2026-11-16 — E78 en cours ; historique du 6 novem
 
 | Etat | Nombre |
 | --- | ---: |
-| A faire | 9 |
+| A faire | 8 |
 | En cours | 12 |
 | Abandonne | 2 |
 | Fusionnee | 1 |
-| Termine | 64 |
+| Termine | 65 |
 
 ### Identifiants applicatifs complémentaires
 
@@ -663,7 +663,7 @@ anciennes US restent historiques.
 | EPIC-52 | Termine | terminees/epic-52-accueil-marketplace-geolocalise-backlog.md, specifications/epic-52-accueil-marketplace-geolocalise/ |
 | EPIC-53 | Termine | terminees/epic-53-tombola-locale-backlog.md, specifications/epic-53-tombola-locale/ |
 | EPIC-54 | A faire | a-faire/epic-54-calendrier-avent-local-backlog.md, specifications/epic-54-calendrier-avent-local/ |
-| EPIC-55 | En cours | en-cours/epic-55-chasse-tresor-commercante-backlog.md, specifications/moteur-animation/localeo_animation_engine_spec.md |
+| EPIC-55 | En cours | [Backlog](en-cours/epic-55-chasse-tresor-commercante-backlog.md) et [spécification du moteur](../specifications/epic-55-moteur-animation/localeo_animation_engine_spec.md) |
 | EPIC-56 | Termine | terminees/epic-56-validation-participation-commercants-animation-backlog.md, specifications/epic-56-validation-participation-commercants-animation/ |
 | EPIC-57 | Termine | terminees/epic-57-bornage-pagination-api-marketplace-backlog.md, specifications/epic-57-bornage-pagination-api-marketplace/ |
 | EPIC-58 | A faire | a-faire/epic-58-filtre-annuel-global-backlog.md, specifications/epic-58-filtre-annuel-global/ |
@@ -690,7 +690,7 @@ anciennes US restent historiques.
 | EPIC-79 | A faire | [backlog](a-faire/epic-79-escape-game-assiste-ia-backlog.md) ; Escape Game assisté par l’IA, 7 US et 18 critères cibles ; préparation IA et validation selon la chasse E55, terrain avec Live et un téléphone confirmés ; quatre arbitrages résolus et quatre ouverts |
 | EPIC-80 | En cours | [Fiabilité des parcours Animation dans Localeo Pro](en-cours/epic-80-fiabilite-parcours-localeo-pro-backlog.md) |
 | EPIC-81 | En cours | [Clarté des parcours publics Marketplace](en-cours/epic-81-parcours-ux-marketplace-20261118-backlog.md) |
-| EPIC-82 | À faire | [Scan QR depuis l’appareil photo avec Localeo Pro](a-faire/epic-82-scan-qr-externe-localeo-pro-backlog.md) |
+| EPIC-82 | Terminée | [Scan QR depuis l’appareil photo avec Localeo Pro](terminees/epic-82-scan-qr-externe-localeo-pro-backlog.md) · Validation sur TEST confirmée le 24 novembre 2026. |
 | EPIC-83 | En cours | [Clés d’accès dans Localeo Pro](en-cours/epic-83-cles-acces-localeo-pro-backlog.md), critères CL-01 à CL-06. |
 | EPIC-84 | En cours | [Adhérents hors commune dans Localeo Animation](en-cours/epic-84-adherents-hors-commune-animation-backlog.md), critères HC-01 à HC-09. |
 | EPIC-85 | En cours | [Parcours organisateur et maquettes](en-cours/epic-85-parcours-organisateur-backlog.md), critères E85-CA-01 à E85-CA-12. |

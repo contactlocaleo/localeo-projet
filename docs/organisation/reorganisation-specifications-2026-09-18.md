@@ -16,7 +16,7 @@ Les anciens dossiers génériques Animation, Backend, Commerçant et Marketplace
 
 Les sujets transverses disposent d'entrées [Identité et accès](../specifications/identite-acces/README.md), [Validation des prestations](../specifications/validation-prestations/README.md), [Espace commerçant](../specifications/espace-commercant/README.md) et [Sécurisation de la production](../specifications/securisation-production/README.md). Les identifiants de correctifs sont distingués par leur application et leur audit.
 
-Le moteur commun conserve sa [spécification unique](../specifications/moteur-animation/localeo_animation_engine_spec.md). Les EPIC 62, 64 et Marketplace 54 restent accessibles depuis leur cadrage de roadmap ; aucun nouveau contrat détaillé n'est inventé.
+Le moteur commun conserve sa [spécification unique](../specifications/epic-55-moteur-animation/localeo_animation_engine_spec.md). Les EPIC 62, 64 et Marketplace 54 restent accessibles depuis leur cadrage de roadmap ; aucun nouveau contrat détaillé n'est inventé.
 
 ## Consolidations et actualisation
 

@@ -1,5 +1,9 @@
 # Spécification technique - Epic 10 - Authentification commerçant login / mot de passe
 
+Le [backlog de l’EPIC 10](../../roadmap/terminees/epic-10-authentification-commercant-login-password-backlog.md) retrace le périmètre et les décisions d’origine.
+
+L’évolution [Clés d’accès dans Localeo Pro](../epic-83-cles-acces-localeo-pro/README.md) ajoute la connexion WebAuthn pour les titulaires et les salariés. Le présent document conserve le parcours de référence par mot de passe et récupération par email.
+
 ## Objectif
 
 Remplacer le parcours d'authentification commerçant par QR code dans la PWA `localeo-commercant` par une authentification login / mot de passe, puis ajouter les parcours :

@@ -64,7 +64,7 @@ Les tests utilisent uniquement des exemples synthétiques de ces contrats.
 
 ## Manifeste et publication
 
-Créer un manifeste JSON privé, puis renseigner `CRM_REFERENTIEL_MANIFEST` avec
+Créer un manifeste JSON privé, puis renseigner `LOCALEO_CRM_REFERENTIEL_MANIFEST` avec
 son chemin absolu sur le serveur. Exemple de structure à compléter :
 
 ```json

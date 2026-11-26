@@ -170,7 +170,7 @@ PostgreSQL jetable, et parcours dans chaque frontend concerné.
 | CA-20 | Ensemble du parcours et capacité | Domaine/application/API/PostgreSQL, PC 1280, mobiles 320/390, texte 200 %, clavier/focus/mouvement réduit, N/10N et charge mixte | Présent dossier, checklist ERP-UX et LIVE-UX | Génération/restauration cohérentes | Budgets ci-dessous ; limites séparées des succès |
 
 Les guides fonctionnels canoniques
-[Animation](../moteur-animation/exploitation-moteur.md),
+[Animation](../epic-55-moteur-animation/exploitation-moteur.md),
 [espace commerçant](../espace-commercant/README.md),
 [Live](../epic-42-localeo-live/README.md) et les procédures
 [E73](../../exploitation/technique/configurer-epic-73.md) seront actualisés avec

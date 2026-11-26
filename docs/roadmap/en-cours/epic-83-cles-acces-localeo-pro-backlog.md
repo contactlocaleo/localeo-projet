@@ -3,7 +3,6 @@
 ## Références
 
 - **État produit · En cours.** Suivi ouvert le 24 novembre 2026 après la réalisation locale. La [roadmap commune](../README.md) porte le classement.
-- **TEST · Schéma migré le 25 novembre 2026.** La version v334 est enregistrée dans PostgreSQL. La recette physique et l’activation restent à réaliser.
 - [Spécification canonique](../../specifications/epic-83-cles-acces-localeo-pro/README.md) et [preuves locales](../../specifications/epic-83-cles-acces-localeo-pro/README.md#preuves-locales).
 - Socles utilisés · [EPIC 10 — Connexion par mot de passe](../terminees/epic-10-authentification-commercant-login-password-backlog.md) et [EPIC 72 — Accès salariés](../terminees/epic-72-acces-salaries-validation-localeo-pro-backlog.md). L’inscription WebAuthn, la gestion des clés et le pilotage par environnement constituent le périmètre de l’EPIC 83.
 

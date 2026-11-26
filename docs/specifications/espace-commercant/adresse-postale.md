@@ -113,7 +113,7 @@ Le schéma de réponse créative du LLM ne change pas ; seuls les contrats de de
 et les projections enrichies sont adaptés. Les snapshots historiques restent lisibles.
 
 Cette règle remplace la saisie organisateur des adresses commerçantes de T2-D04
-dans la [conception du moteur](../moteur-animation/conception-technique.md).
+dans la [conception du moteur](../epic-55-moteur-animation/conception-technique.md).
 
 ## 6. Livraison et vérification
 
@@ -126,6 +126,6 @@ La livraison comporte un commit par dépôt modifié.
 Les preuves couvrent : normalisation et refus métier, persistance, droits de
 modification, conflit de version, blocage de validation Onboard, origine serveur
 des adresses du prompt, conservation des snapshots, interfaces mobile/bureau et
-synchronisation des contrats. Le [bilan d’exécution](../moteur-animation/suivi-implementation.md#évolution-transverse--adresse-postale-du-commerce-20-septembre-2026)
+synchronisation des contrats. Le [bilan d’exécution](../epic-55-moteur-animation/suivi-implementation.md#évolution-transverse--adresse-postale-du-commerce-20-septembre-2026)
 détaille les commandes, résultats et limites. La migration a été vérifiée sur
 une base PostgreSQL jetable ; elle n’a pas été appliquée à un environnement distant.

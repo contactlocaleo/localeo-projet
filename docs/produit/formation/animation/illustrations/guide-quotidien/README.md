@@ -479,7 +479,7 @@ Les captures `lots-remises-1024.png` et `lots-remises-390.png` présentent la
 liste globale **Lots et remises** : bénéficiaires, états, lieux de retrait,
 utilisation des bons et coffrets et actions disponibles. La recette utilise
 des données fictives. Base Git Animation `4a86877` avec l’alignement de la
-liste sur Tirages. Au chapitre « Organiser le tirage et les retraits »,
+liste sur Tirages. Au chapitre « Tirer au sort et suivre la remise des lots »,
 la capture bureau de 702 × 440 pixels cadre les en-têtes et les deux premières
 lignes. La capture mobile de 390 × 772 pixels va du titre de liste au bas de
 la première fiche, avec le lieu de retrait et l’action de remise.
@@ -493,11 +493,11 @@ node scripts/build-pwa-tests.mjs
 node tests/browser/animation-guide.mjs --only=lots-remises --captures-only
 ```
 
-Les 22 pages du guide versionné ont été rendues. La page 16, « Organiser
-le tirage et les retraits », contient la nouvelle capture. Le texte, les
-signets, les liens et les 21 autres pages correspondent au PDF de référence.
-La copie embarquée dans Animation est identique au PDF canonique. L'accès
-depuis l'application a été vérifié à 390 et 1 024 px.
+Le 25 novembre, les 25 pages ont été rendues et relues, avec une vérification
+détaillée de la page 19. Le texte, les signets, les liens et les 24 autres
+pages sont identiques au PDF avant le correctif. La copie embarquée est identique
+au PDF canonique. Le mode `--access-only` a vérifié le lien au clavier et le
+PDF servi depuis le build `tmp/alignement-suivi-final` à 390 et 1 024 px.
 
 Le [bilan de livraison E73](../../../../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md)
 conserve les preuves de la première livraison. Passe du 22 novembre avec

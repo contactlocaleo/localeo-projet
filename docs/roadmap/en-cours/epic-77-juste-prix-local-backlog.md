@@ -8,7 +8,7 @@
   des quatre dépôts applicatifs ; aucun cadrage ou moteur de Juste Prix trouvé.
 - Demande : faire deviner aux habitants le prix d'un produit chez chaque
   commerçant participant, avec un seuil configurable d'éligibilité au gain.
-- Socles : [moteur E55](../../specifications/moteur-animation/README.md),
+- Socles : [moteur E55](../../specifications/epic-55-moteur-animation/README.md),
   [participation commerçante E56](../../specifications/epic-56-validation-participation-commercants-animation/README.md),
   [Live E42](../../specifications/epic-42-localeo-live/README.md),
   [Animation E73](../../specifications/epic-73-animation-et-ou-coffrets/README.md),

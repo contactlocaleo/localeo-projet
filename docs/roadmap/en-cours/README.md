@@ -17,7 +17,7 @@ Douze EPIC sont classées en cours. Ce classement ne vaut ni clôture ni déploi
 - [EPIC 80 — Fiabilité des parcours Animation dans Localeo Pro](epic-80-fiabilite-parcours-localeo-pro-backlog.md) : spécification et corrections locales du scanner, de la boîte Notifications et des dates du kit ; diagnostics, maquettes et recettes encore ouverts.
 
 - [EPIC 55 — Moteur commun et chasse au trésor](epic-55-chasse-tresor-commercante-backlog.md) :
-  conception, arbitrages et suivi de livraison. La [spécification unique](../../specifications/moteur-animation/localeo_animation_engine_spec.md)
+  conception, arbitrages et suivi de livraison. La [spécification unique](../../specifications/epic-55-moteur-animation/localeo_animation_engine_spec.md)
   décrit la cible ; ce classement ne vaut pas validation de l'implémentation.
 
 L'[identité visuelle Marketplace](../a-faire/epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md)

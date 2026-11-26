@@ -2,13 +2,13 @@
 
 ## Références
 
-- **État produit : À faire**, selon la [roadmap commune](../README.md). Cadrage du 24 novembre 2026. Identifiant 82 vérifié dans le dépôt Projet et les quatre dépôts applicatifs.
+- **État produit · Terminée sur TEST le 24 novembre 2026**, selon la [roadmap commune](../README.md). Le porteur produit confirme la validation en tests et demande la clôture. [Bilan de clôture](../../specifications/epic-82-scan-qr-externe-localeo-pro/README.md#clôture-sur-test-le-24-novembre-2026)
 - Décisions utilisateur : inclure les QR Coffret, participant Animation et bon numérique. L’analyse démarre automatiquement après connexion si nécessaire. Le commerçant confirme l’action finale. Le navigateur mobile suffit. Le scanner historique doit continuer à fonctionner comme aujourd’hui.
 - Socles : [scan professionnel](../../specifications/validation-prestations/scan-commercant.md), [E72 — accès salariés](../../specifications/epic-72-acces-salaries/README.md), [E73 — remise des bons](../../specifications/epic-73-animation-et-ou-coffrets/dotation-lots.md) et [E80 — fiabilité et reprise](../en-cours/epic-80-fiabilite-parcours-localeo-pro-backlog.md). E82 ajoute l’entrée depuis le téléphone aux trois familles de QR. E80 traite la fiabilité du parcours Animation dans Pro.
 
 ## Problème et résultat attendu
 
-Le scanner Pro reconnaît les trois familles de QR. Depuis l’appareil photo du téléphone, les QR Coffret et Bon numérique encodent un identifiant brut. Le QR personnel du participant ouvre l’accès client dans Localeo Live.
+Avant E82, le scanner Pro reconnaissait les trois familles de QR. Les QR Coffret et Bon numérique encodaient un identifiant brut. Le QR personnel du participant ouvrait l’accès client dans Localeo Live.
 
 Au comptoir, un responsable ou un salarié habilité scanne le QR du client avec l’appareil photo, ouvre le lien détecté et se connecte si nécessaire. Localeo Pro affiche directement la prestation, l’étape ou le bon à confirmer. Le commerçant peut aussi ouvrir **Scanner** dans Pro et suivre le parcours habituel.
 
@@ -44,4 +44,4 @@ Au comptoir, un responsable ou un salarié habilité scanne le QR du client avec
 
 ## Passage à la spécification
 
-Les arbitrages produit du périmètre initial sont résolus. La [spécification fonctionnelle et technique E82](../../specifications/epic-82-scan-qr-externe-localeo-pro/README.md) détaille les deux parcours, les contrats, la traçabilité des critères et les preuves restantes avant activation.
+La [spécification fonctionnelle et technique E82](../../specifications/epic-82-scan-qr-externe-localeo-pro/README.md) détaille les deux parcours, les contrats, la traçabilité des critères et la mise en service par environnement.

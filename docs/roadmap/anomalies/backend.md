@@ -102,7 +102,7 @@ d'accès. Aucun accès personnel utilisateur n'a été employé.
 avec la connexion fournie au processus par son mécanisme de configuration.
 Politique de recette version 1 : global **6 000 / 60 s**, origine **600 / 60 s**,
 personnel **60 / 900 s**, capacités **1 024 origines / 4 096 personnels**.
-Ces valeurs viennent de la [recette A04](../../specifications/moteur-animation/conception-technique.md#e55-audit-20261113)
+Ces valeurs viennent de la [recette A04](../../specifications/epic-55-moteur-animation/conception-technique.md#e55-audit-20261113)
 et concernent cette cible TEST ; elles ne calibrent pas la production.
 La purge opérateur a réussi avec zéro compteur expiré. La requête de contrôle
 identique reçoit ensuite `404 RESSOURCE_INTROUVABLE` : le limiteur fonctionne
@@ -143,7 +143,7 @@ embarqué à régénérer. Générateur et fixtures sans impact : aucune donnée
 d'animation ni inscription n'est modifiée. Aucun token réel, e-mail, nouvelle
 inscription ou intervention en production. La consultation du jeu avec
 l'accès personnel de l'utilisateur et le déploiement du code ne sont pas
-vérifiés par ces contrôles. Procédure dans l'[exploitation du moteur](../../specifications/moteur-animation/exploitation-moteur.md#diagnostiquer-une-politique-de-limiteur-absente).
+vérifiés par ces contrôles. Procédure dans l'[exploitation du moteur](../../specifications/epic-55-moteur-animation/exploitation-moteur.md#diagnostiquer-une-politique-de-limiteur-absente).
 
 ## ANO-ERP-SESSION-POPIN-20261112 — Reconnexion homogène avec Animation
 

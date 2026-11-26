@@ -6,7 +6,7 @@ Le parcours de référence utilise une session commerçant et le QR du client. L
 - [Scan commerçant — PRO-005](scan-commercant.md)
 - [Scan depuis l’appareil photo — E82](../epic-82-scan-qr-externe-localeo-pro/README.md)
 - [Identifiant du QR remis au client](identifiant-qr.md)
-- [Authentification commerçant](../identite-acces/authentification-commercant.md)
+- [Authentification commerçant](../epic-10-authentification-commercant/README.md)
 
 L'[ancien parcours à deux scans](../archives/validation-prestation-deux-scans.md) est archivé : il ne doit pas servir de contrat d'implémentation.
 
