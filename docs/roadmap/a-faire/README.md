@@ -4,7 +4,9 @@ Spécifications V1 du 5 octobre : [E70 — PIN](../../specifications/epic-70-val
 
 [Retour à la roadmap](../README.md)
 
-Huit EPIC sont classées à faire. Les bilans techniques et réserves de chaque backlog restent conservés.
+Neuf EPIC sont classées à faire. Les bilans techniques et réserves de chaque backlog restent conservés.
+
+- [EPIC 86 — Support autonome en lecture seule dans Animation et Pro](epic-86-support-autonome-lecture-seule-backlog.md) · Compte nominatif, passkey, portée par produit et menu client complet. Neuf critères couvrent les accès, l’audit et la charge globale.
 
 - [EPIC 79 — Escape Game assisté par l’IA](epic-79-escape-game-assiste-ia-backlog.md) : préparation IA et validation avant publication selon le processus de la chasse E55, jeu dans la commune/commerces guidé par Live et un téléphone confirmés ; 7 US, 18 critères cibles, quatre arbitrages ouverts.
 

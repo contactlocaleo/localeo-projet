@@ -1,5 +1,10 @@
 # Roadmap par etat
 
+**26 novembre 2026 — EPIC 86, À faire.** Accès support autonome à Localeo
+Animation et Pro avec un compte nominatif, une passkey et une portée par produit.
+Consultation du menu client en lecture seule, audit des lectures et mesure de
+l’impact global avant activation. [Cadrage](a-faire/epic-86-support-autonome-lecture-seule-backlog.md)
+
 **26 novembre 2026 — E73-EVO-LIVE-CARNET-NOTIFICATIONS.** Les habitants peuvent
 masquer une animation ou un lot puis le réafficher à la demande. Ils peuvent
 supprimer une entrée lue ou non lue du centre de notifications sur leur appareil.
@@ -256,12 +261,12 @@ Le bilan conserve la dette préexistante de lecture bornée et les actions de li
 
 Classement consolidé le 18 septembre 2026, complété le 22 octobre par les EPIC 74 et 75. Les backlogs des applications sont
 réunis dans les dossiers d'état, avec un seul fichier par EPIC. Le suivi inclut
-les 85 identifiants du tronc commun et trois identifiants applicatifs distincts.
+les 86 identifiants du tronc commun et trois identifiants applicatifs distincts.
 
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
 | Terminees | 65 | [terminees/](terminees/README.md) |
-| A faire | 8 | [a-faire/](a-faire/README.md) |
+| A faire | 9 | [a-faire/](a-faire/README.md) |
 | En cours | 12 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
@@ -463,6 +468,7 @@ précise la provenance et les divergences historiques conservées.
 | 83 | En cours | [Clés d’accès dans Localeo Pro](en-cours/epic-83-cles-acces-localeo-pro-backlog.md) : connexion sans saisie du mot de passe, gestion des clés et bascule Ops réalisées localement, recette et activation par cible à mener. |
 | 84 | En cours | [Adhérents hors commune dans Localeo Animation](en-cours/epic-84-adherents-hors-commune-animation-backlog.md). Saisie, import, participation en magasin, agendas Live et renouvellement du réseau. |
 | 85 | En cours | [Parcours organisateur et maquettes](en-cours/epic-85-parcours-organisateur-backlog.md). Refonte des onglets et du contenu des fiches d’animation. |
+| 86 | A faire | [Support autonome en lecture seule dans Animation et Pro](a-faire/epic-86-support-autonome-lecture-seule-backlog.md) · Compte nominatif, passkey, menu client complet, audit des lectures et budgets de charge. |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |
 
 Les changements des Epics 5, 12 et 47 corrigent des incoherences entre les

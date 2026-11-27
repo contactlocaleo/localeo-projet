@@ -12,6 +12,7 @@ Le 23 novembre 2026, le paramètre des trois services est harmonisé sur `LOCALE
 - Ces epics définissent les identités, droits et parcours à préserver. E76 ajoute une délégation temporaire entre applications pour le support ; elle ne rouvre pas leurs clôtures et ne remplace pas les actions d'administration ERP existantes.
 - Frontières vérifiées : E69 sépare les sessions internes et clientes dans son [architecture](../../specifications/epic-69-acces-internes/architecture-contrats.md) ; E73 distingue opérateur ERP, équipe organisatrice et notes internes dans les [parcours SaaS](../../specifications/epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md) ; E72 distingue commerce et acteur principal/salarié dans son [architecture](../../specifications/epic-72-acces-salaries/architecture-contrats.md).
 - [Spécification E76](../../specifications/epic-76-impersonification-support-pro-animation/README.md) : parcours, actions autorisées, architecture, garde-fous de charge et matrice de recette. Ce backlog reste la source canonique du besoin et des arbitrages.
+- [E86 — Support autonome en lecture seule](../a-faire/epic-86-support-autonome-lecture-seule-backlog.md) porte le compte nominatif, la connexion directe depuis les applications et la consultation du menu complet, avec sa propre recette de sécurité et de charge.
 
 ## Problème et résultat attendu
 

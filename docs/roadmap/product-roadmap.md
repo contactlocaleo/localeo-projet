@@ -1,5 +1,7 @@
 # Roadmap produit
 
+**26 novembre 2026 — EPIC 86, À faire.** Donner aux agents Localeo un accès nominatif pour consulter le menu d’un gestionnaire, d’un titulaire ou d’un salarié depuis Animation ou Pro. [Cadrage](a-faire/epic-86-support-autonome-lecture-seule-backlog.md)
+
 **25 novembre 2026 — EPIC 85, En cours.** Guider le gestionnaire depuis la préparation jusqu’au bilan, avec un accès direct au tirage et des contenus homogènes pour chaque modèle. [Cadrage et maquettes](en-cours/epic-85-parcours-organisateur-backlog.md)
 
 **24 novembre 2026 — EPIC 84, En cours.** [Adhérents hors commune dans Localeo Animation](en-cours/epic-84-adherents-hors-commune-animation-backlog.md). Une association invite ses adhérents extérieurs depuis sa souscription et les habitants retrouvent l’animation dans les agendas des communes participantes.
@@ -26,15 +28,15 @@ Clôture E70 du **2 novembre 2026** : **Terminée**, 34 critères vérifiés sur
 
 E72 — accès salariés est terminée le 1er novembre 2026 selon E72-DEC-CLOTURE-TESTS : tests unitaires, d'intégration et fonctionnels des 22 critères vérifiés. Le [bilan E72](../specifications/epic-72-acces-salaries/verification-livraison.md) distingue la clôture technique des actions de mise en service. Aucun déploiement effectué.
 
-## État global consolidé au 25 novembre 2026
+## État global consolidé au 26 novembre 2026
 
-Le tronc commun comprend 85 identifiants, dont 63 epics terminees, 7 a faire,
+Le tronc commun comprend 86 identifiants, dont 63 epics terminees, 8 a faire,
 12 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
 Les documents sont ranges par etat dans l'[index de la roadmap](README.md).
 
 | Etat | Epics |
 | --- | --- |
-| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-67`, `EPIC-75`, `EPIC-79` |
+| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-67`, `EPIC-75`, `EPIC-79`, `EPIC-86` |
 | En cours | `EPIC-55`, `EPIC-68`, `EPIC-71`, `EPIC-74`, `EPIC-76`, `EPIC-77`, `EPIC-78`, `EPIC-80`, `EPIC-81`, `EPIC-83`, `EPIC-84`, `EPIC-85` |
 | Termine | 63 epics : toutes les autres epics de `EPIC-01` a `EPIC-60`, et `EPIC-63`/`EPIC-65`/`EPIC-66`/`EPIC-69`/`EPIC-70`/`EPIC-72`/`EPIC-73`/`EPIC-82`, hors `EPIC-05` et `EPIC-12` |
 | Abandonne | `EPIC-05` : QR commercant remplace par l'Epic 10 ; `EPIC-12` : flux manuel decommissionne par l'Epic 39 |
@@ -49,7 +51,7 @@ un seul fichier par sujet. Trois identifiants applicatifs complètent ce tronc :
 | [EPIC-MARKETPLACE-54](a-faire/epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md) | Identité visuelle ; distinct du calendrier de l'Avent 54 | À faire (classement courant ; implémentation locale documentée, revue et recette attendues) |
 | [EPIC-PRES-CONTENU-001](terminees/epic-animation-edition-prestations.md) | Édition directe des prestations ; le futur sas reste dans l'EPIC 62 | Terminée (parcours existant) |
 
-Le total consolidé est de **88 identifiants, dont 65 terminés, 8 à faire, 12 en cours,
+Le total consolidé est de **89 identifiants, dont 65 terminés, 9 à faire, 12 en cours,
 2 abandonnés et 1 fusionné**. L'ancien numéro local Marketplace 53 (pagination)
 est rattaché à l'EPIC 57, sans ajouter d'identifiant ni le confondre avec la tombola.
 
