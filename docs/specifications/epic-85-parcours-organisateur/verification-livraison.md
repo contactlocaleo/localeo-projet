@@ -159,3 +159,31 @@ affiché d’emblée à 320 px. Après l’évolution, l’ouverture donne la pr
   La copie embarquée correspond au PDF canonique et son accès dans le build
   a été vérifié aux deux largeurs. Le guide Commerçant couvre la remise par
   le Scanner de Pro, qui relève d’un autre parcours.
+
+## E85-EVO-BILAN-DIFFUSION — Bilan et rapport à partager
+
+Recette locale du 27 novembre 2026, sur les bases Backend `204c6466` et
+Animation `7e936e4` avec l’évolution. Les contrôles finaux de rendu et
+d’architecture ont aussi été rejoués avec Backend `aea3811d`.
+Voir les [critères du bilan](bilan-diffusion.md).
+
+| Critère | Vérification exécutée |
+| --- | --- |
+| E85-CA-21 | Deux volets du [banc Bilan](../../../../localeo-animation/tests/browser/animation-workspace-ux.mjs) réussis, chacun sur huit configurations jusqu’à 320 px avec texte à 200 %. Les scénarios couvrent notamment les états provisoire et définitif, les téléchargements des trois formats, le focus après actualisation et le refus de télécharger les annexes quand la route de diffusion est indisponible. |
+| E85-CA-22 | Quatre tests [PostgreSQL 18.3](../../../../localeo-backend/tests/security/test_bilan_pdf_postgres.py) réussis sur une base jetable migrée. Ils couvrent le changement de jour de Paris en été et en hiver, le tenant, les validations exclues, les bornes et la cohérence de l’instantané pendant une inscription concurrente. Les deux plans synthétiques utilisent les index d’édition. La médiane passe de 2,1 à 18,2 ms entre 1 000 et 10 000 lignes cibles par table pour 30 jours rendus. |
+| E85-CA-23 | Les [tests de rendu](../../../../localeo-backend/tests/infrastructure/test_bilan_animation_pdf.py) vérifient les états du tirage, les mesures manquantes, le regroupement des dates, les valeurs et les pics, la pagination, la langue et les liens du sommaire. Toutes les pages de rapport complet, provisoire partiel et interne ont été rendues et relues sur données fictives. |
+| E85-CA-24 | Les [tests API](../../../../localeo-backend/tests/api/test_bilan_pdf_export.py) et [de l’instantané](../../../../localeo-backend/tests/application/animation_locale/test_bilan_pdf_snapshot.py) vérifient les droits, le refus du débordement et les deux projections. Les deux PDF déclarent le transport de session Animation dans le contrat généré, documentaire et embarqué. La route CSV conserve le contrat déjà consommé. |
+
+Les 44 tests backend ciblés et les 793 contrôles d’architecture passent. Les
+443 tests d’Animation, TypeScript, ESLint et le build isolé passent. Le profil
+général de défilement s’arrête dans la liste Animations avant le Bilan, avec
+le même résultat sur un build antérieur.
+
+Le [guide Animation](../../../livrables/formation/animation/guide-quotidien-localeo-animation.pdf)
+présente le téléchargement en page 25 et utilise des captures réelles du
+portail sur API synthétique. Les 30 pages rendues et les 58 liens internes ont
+été relus. La copie distribuée est vérifiée depuis Aide et support et le menu
+du compte à 390 et 1 024 px, y compris lorsque le support est indisponible. Le
+guide Commerçant couvre les gestes dans Pro. Les données de démonstration
+existantes alimentent les mêmes lectures. Les vérifications publiées ici
+portent sur l’environnement local.

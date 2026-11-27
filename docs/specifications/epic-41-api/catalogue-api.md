@@ -113,7 +113,8 @@ La disponibilite du module est determinee depuis son activation ou son abonnemen
 | ANI-G-005 | `POST /protected/animation-locale/animations/{animation_id}/gains/{gain_id}/relancer` | Relancer la notification d'un gagnant sans recreer son gain. | P1 |
 | ANI-B-001 | `GET /protected/animation-locale/animations/{animation_id}/bilan` | KPIs, synthese finale et objet `consommation_financiere` defini par l'Epic 41 ; accepte `horizon_expiration_jours` de 1 a 365, 30 par defaut. | P0 |
 | ANI-B-002 | `GET /protected/animation-locale/animations/{animation_id}/bilan/export.csv` | Export CSV du bilan. | P1 |
-| ANI-B-003 | `GET /protected/animation-locale/animations/{animation_id}/bilan/export.pdf` | Export PDF complet du bilan. | P2 |
+| ANI-B-003 | `GET /protected/animation-locale/animations/{animation_id}/bilan/export.pdf` | Export PDF du bilan avec annexes internes (commentaires et audit). | P2 |
+| ANI-B-004 | `GET /protected/animation-locale/animations/{animation_id}/bilan/rapport.pdf` | Rapport PDF à partager avec mesures agrégées et chronologie de participation. | P2 |
 
 ### 4.6 Vues globales du portail
 

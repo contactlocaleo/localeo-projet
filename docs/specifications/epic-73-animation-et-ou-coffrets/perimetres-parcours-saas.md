@@ -1075,7 +1075,7 @@ zéro et date la collecte sans reconstituer l’historique.
 
 Questionnaire Live après clôture, facultatif : une réponse par participation, note entière 1 à 5 et commentaire texte facultatif (borne technique 2 000 caractères, rendu échappé). Une seconde écriture de la même réponse remplace son contenu sous version plutôt que d’ajouter une voix. Rejeter avant clôture, note hors intervalle ou accès à une autre participation. Aucun message automatique supplémentaire. Bilan organisateur : moyenne, nombre de réponses et commentaires, sans identité ni identifiant participant, email, token ou horodatage fin permettant de relier une réponse. Cela ne prétend pas rendre anonyme un commentaire où le répondant se nomme ; ne pas enrichir le texte avec son identité. Données sources soumises à la conservation des participations ; agrégats réellement non identifiants séparés.
 
-Le PDF du Bilan présente les résultats, les objectifs lorsqu’ils existent,
+Le PDF interne du Bilan présente les résultats, les objectifs lorsqu’ils existent,
 la performance des liens et QR par support, la satisfaction avec commentaires,
 puis l’audit de l’animation. Le **taux de satisfaction** vaut le nombre de notes
 4 ou 5 divisé par le nombre de réponses, exprimé en pourcentage ; sans réponse,
@@ -1090,6 +1090,9 @@ Chaque liste détaillée est bornée à 10 000 lignes. Au-delà, refus 422 expli
 `EXPORT_DIFFERE_REQUIS`, jamais un PDF tronqué ; aucun export différé automatique
 n’est créé par ce correctif. Texte échappé, tableaux multipages et polices
 embarquées préservent commentaires, accents et lignes longues.
+
+L’[évolution du bilan E85](../epic-85-parcours-organisateur/bilan-diffusion.md)
+décrit le rapport agrégé à partager et les nouvelles rubriques communes aux deux PDF.
 
 ### Évolution du 11 novembre 2026 — dynamisme de la commune
 

@@ -802,3 +802,21 @@ proviennent du composant Animation sur la base `c1fef0e` avec le compteur global
 
 Depuis `localeo-animation`, relancer `node tests/browser/juste-prix-products.mjs --guide-captures`
 pour reproduire ces captures à partir de l’API simulée.
+
+## Télécharger le bilan PDF le 27 novembre 2026
+
+Les captures [ordinateur](bilan-1024.png) et [téléphone](bilan-390.png)
+montrent les repères de l’édition et le téléchargement du rapport dans
+**Bilan → Résultats**. Elles proviennent de l’application Animation construite
+sur la base `7e936e4` avec E85-EVO-BILAN-DIFFUSION et des données fictives.
+
+Depuis `localeo-animation`, produire les captures de recette dans un dossier
+de travail puis recopier les deux images relues dans ce dossier d’illustrations.
+
+```powershell
+$env:ANIMATION_TEST_DIST = 'tmp/bilan-guide-build'
+$env:ANIMATION_GUIDE_CAPTURE_ROOT = 'tmp/bilan-guide-captures/images'
+$env:ANIMATION_GUIDE_ARTIFACTS = 'tmp/bilan-guide-captures'
+node scripts/build-pwa-tests.mjs
+node tests/browser/animation-guide.mjs --only=bilan --captures-only
+```

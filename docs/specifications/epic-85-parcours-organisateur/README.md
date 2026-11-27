@@ -6,6 +6,7 @@ Spécification du 25 novembre 2026. **État produit : En cours.** Le gestionnair
 | --- | --- |
 | Le périmètre et les engagements E85-CA-01 à 19 | [Cadrage et critères d’acceptation](../../roadmap/en-cours/epic-85-parcours-organisateur-backlog.md) |
 | Les règles et les écrans propres à chaque jeu | [Parcours détaillés des six modèles implémentés et des trois modèles en projet](modeles.md) |
+| Lire les résultats et présenter le bilan de l’édition | [Page Bilan et rapport PDF](bilan-diffusion.md) |
 | Les recommandations, les droits, les refus et la reprise d’une opération | [Architecture et compatibilité](architecture.md) |
 | Les scénarios à exécuter et la revue avec des gestionnaires | [Matrice de recette et lots](recette.md) |
 | Les comportements implémentés et les vérifications locales | [Bilan par critère](verification-livraison.md) |

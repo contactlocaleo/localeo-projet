@@ -157,6 +157,14 @@ formulaire de suivi était affiché à l’ouverture. La déclaration d’une re
 effective devient le geste principal. Le suivi s’ouvre séparément à la demande.
 [Parcours cible](../../specifications/epic-85-parcours-organisateur/README.md#passer-dune-vue-à-lautre-dans-une-rubrique) · [Recette E85-CA-20](../../specifications/epic-85-parcours-organisateur/recette.md) · [Preuves locales](../../specifications/epic-85-parcours-organisateur/verification-livraison.md#e85-evo-03-priorite-remise)
 
+### E85-EVO-BILAN-DIFFUSION — Bilan et rapport à partager du 27 novembre 2026
+
+**Résultats** rend les chiffres clés et le téléchargement PDF directement
+accessibles. Le rapport à partager présente la chronologie de la participation,
+les objectifs, les retombées observables et la couverture des mesures. La
+version interne conserve les commentaires et l’audit. Les critères **E85-CA-21
+à E85-CA-24** et les impacts figurent dans la [spécification du bilan](../../specifications/epic-85-parcours-organisateur/bilan-diffusion.md).
+
 ## Impacts et passage à la spécification
 
 | Sujet | Impact initial |

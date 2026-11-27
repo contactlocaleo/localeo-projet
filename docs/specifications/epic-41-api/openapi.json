@@ -131675,6 +131675,7 @@
           "Animation locale"
         ],
         "summary": "Exporter Bilan Pdf Animation",
+        "description": "Bilan détaillé avec les annexes de gestion (commentaires et audit).",
         "operationId": "exporter_bilan_pdf_animation",
         "parameters": [
           {
@@ -131718,8 +131719,38 @@
               }
             }
           },
+          "401": {
+            "description": "Session organisateur Animation requise.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Droit animation:exporter requis dans la commune active.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Animation introuvable dans le périmètre autorisé.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
           "422": {
-            "description": "Validation Error",
+            "description": "Identifiant invalide ou volume supérieur à la limite synchrone (EXPORT_DIFFERE_REQUIS).",
             "content": {
               "application/json": {
                 "schema": {
@@ -131731,7 +131762,113 @@
         },
         "security": [
           {
-            "CommercantSessionBearer": []
+            "AnimationSessionBearer": []
+          },
+          {
+            "AnimationSessionCookie": [],
+            "AnimationSessionTransport": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/bilan/rapport.pdf": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Telecharger Rapport Pdf Animation",
+        "description": "Rapport de bilan à partager avec les résultats agrégés et la chronologie de participation.",
+        "operationId": "telecharger_rapport_pdf_animation",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Session organisateur Animation requise.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Droit animation:exporter requis dans la commune active.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Animation introuvable dans le périmètre autorisé.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Identifiant invalide ou volume supérieur à la limite synchrone (EXPORT_DIFFERE_REQUIS).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AnimationSessionBearer": []
+          },
+          {
+            "AnimationSessionCookie": [],
+            "AnimationSessionTransport": []
           }
         ]
       }

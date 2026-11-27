@@ -257,7 +257,7 @@ Ouvrez l’animation concernée dans la bonne commune. Pour aider une personne, 
 
 ### Consulter les résultats pendant l’animation
 
-Dans **Participation**, ouvrez **Bilan provisoire** pour lire les chiffres disponibles et les comparer aux objectifs. Vérifiez leur période et leur date d’observation avant de les partager. Après clôture, retrouvez-les dans **Bilan**.
+Dans **Participation**, ouvrez **Bilan provisoire** pour lire les chiffres disponibles et les comparer aux objectifs. Vérifiez la date d’observation avant de partager le rapport. Après clôture, retrouvez ces résultats dans **Bilan**.
 
 ### Si vous devez intervenir sur le parcours
 
@@ -371,15 +371,17 @@ Choisissez **Ajouter un suivi** lorsque l’action est proposée. Renseignez le 
 
 Après clôture, ouvrez **Bilan** pour retrouver les chiffres à partager et les éléments à garder pour la prochaine édition.
 
-1. Dans **Bilan**, choisissez **Résultats**. Lisez les inscriptions, les parcours, les passages et les lots remis. Pour un jeu avec tirage, **Tirage à venir** ou **Tirage en cours** indique que le résultat se fait attendre. **Tirage confirmé · 0 gagnant** signifie que le tirage a eu lieu.
-2. Vérifiez la période, la date d’observation et les données couvertes. Pour comparer deux éditions, choisissez **Comparaison**. Revenez à **Résultats** pour retrouver les chiffres et **Exporter le bilan**.
-3. Après avoir réglé les derniers dossiers, utilisez les actions proposées pour terminer ou archiver l’édition. Dans **Mes archives**, ouvrez le nom de l’édition pour retrouver son bilan selon vos droits.
+1. Dans **Bilan → Résultats**, vérifiez la période et la date d’observation. Repérez les inscriptions, les parcours et les passages validés. Pour un jeu avec tirage, **Tirage confirmé · 0 gagnant** indique que le tirage a eu lieu.
+2. Choisissez **Télécharger le bilan PDF** pour préparer votre compte rendu aux commerces ou à la mairie. Ouvrez le fichier téléchargé. La synthèse et le sommaire précèdent la chronologie, les résultats et la lecture des objectifs.
+3. Pour vos dossiers de gestion, ouvrez **Autres exports**. Choisissez **PDF avec annexes internes** pour consulter aussi les commentaires et l’audit, ou **Télécharger le bilan CSV** pour exploiter les chiffres dans un tableur.
 
-![Cette édition a réuni trois inscrits. Le tirage est confirmé et personne n’a gagné de lot.](illustrations/guide-quotidien/bilan-1024.png)
+![Dans Résultats, le téléchargement du PDF à partager se trouve à côté des repères de l’édition.](illustrations/guide-quotidien/bilan-1024.png)
+
+Choisissez **Comparaison** pour rapprocher deux éditions. Après avoir réglé les derniers dossiers, utilisez les actions proposées pour terminer ou archiver l’édition. Le bilan devient définitif à la fin de gestion. Retrouvez-le dans **Mes archives** après archivage, selon vos droits.
 
 ### Repartir de l’édition précédente
 
-Dans **Animations** ou **Mes archives**, choisissez **Cloner** sous le nom de l’édition si l’action est proposée. Relisez les éléments repris avant de créer le nouveau brouillon. Vérifiez ses dates, les accords des commerçants, les préparatifs et les lots avant de publier. Les résultats et les gagnants restent associés à l’édition d’origine. Dans le bilan, **non applicable** indique une mesure sans objet pour ce jeu. **Non collectée** indique que le chiffre est inconnu.
+Dans **Animations** ou **Mes archives**, choisissez **Cloner** sous le nom de l’édition si l’action est proposée. Relisez les éléments repris avant de créer le nouveau brouillon. Vérifiez ses dates, les accords des commerçants, les préparatifs et les lots avant de publier. Les résultats et les gagnants restent associés à l’édition d’origine. Dans le bilan, **Sans objet** indique qu’un indicateur ne s’applique pas. **Non collecté** indique que le chiffre est inconnu.
 
 <!-- Sommaire : Importer des commerces et obtenir de l’aide -->
 

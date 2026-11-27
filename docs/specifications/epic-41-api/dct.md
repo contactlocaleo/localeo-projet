@@ -479,7 +479,8 @@ Fiche animation et projections :
 - `POST /protected/animation-locale/animations/{animation_id}/flyer/regenerer`
 - `GET /protected/animation-locale/animations/{animation_id}/bilan`
 - `GET /protected/animation-locale/animations/{animation_id}/bilan/export.csv`
-- `GET /protected/animation-locale/animations/{animation_id}/bilan/export.pdf` en P2
+- `GET /protected/animation-locale/animations/{animation_id}/bilan/export.pdf` pour le bilan PDF avec annexes internes
+- `GET /protected/animation-locale/animations/{animation_id}/bilan/rapport.pdf` pour le rapport PDF à partager, avec le droit `animation:exporter`
 - `GET /protected/animation-locale/animations/{animation_id}/audit`
 
 Vues globales du portail partenaire :
