@@ -154,9 +154,8 @@ et annoncé ; **Tous les lots** permet de revenir à l'ensemble des états.
 La synthèse conserve une vue d'ensemble de tous les types et états, même quand
 la liste affiche une tâche précise. Elle prend en compte l'animation, la
 recherche, le lieu de remise et l'échéance, mais omet les filtres de tâche
-`nature`, `etat` et `rappel_possible`. Sa portée est expliquée à l'écran :
-« Vue d'ensemble : tous les types de lots et tous les états. Animation,
-recherche, lieu et échéance restent pris en compte. » Les compteurs portent sur
+`nature`, `etat` et `rappel_possible`. Le volet **Détails** explique cette portée
+et indique la date d’observation et la couverture. Les compteurs portent sur
 l'ensemble du périmètre serveur, jamais seulement sur les lignes visibles.
 Une synthèse indisponible reste indisponible ; elle n'est pas remplacée par zéro.
 
@@ -165,8 +164,8 @@ nature ou de rappel qui pourraient le contredire. **Tous les lots** retire ces
 trois filtres de tâche. Dans les deux cas, les critères de contexte sont
 conservés, la pagination reprend au début et la sélection de rappel est purgée
 selon les règles existantes. Le filtre opérationnel choisi reste compréhensible
-près de la liste, y compris lorsque les filtres avancés sont repliés. Les
-raccourcis n’ouvrent pas automatiquement ce volet : sa position reste conservée.
+près de la liste, y compris lorsque le volet **Filtres** est replié. Les
+raccourcis conservent l’ouverture ou la fermeture du volet.
 
 ### Lire une ligne pour agir
 
@@ -248,18 +247,17 @@ Producteurs confirmés dans le backend :
 
 ## Parcours organisateur
 
-**Entrée.** La page `/lots-remises` affiche « Lots et remises », l’organisation,
-la commune active et le [filtre Animations de Suivre l’activité](ux-productivite-organisateur.md#évolution-du-26-novembre-2026--filtre-des-animations-dans-suivre-lactivité).
-Elle est accessible depuis le menu de bureau et **Plus → Suivre l’activité**
-sur mobile. Aucun choix préalable d’animation n’est obligatoire.
+**Entrée.** La page `/lots-remises` affiche « Lots et remises ». La barre du portail
+indique la commune active et le compte indique l’organisation. L’entrée est
+accessible depuis le menu de bureau et **Plus → Suivre l’activité** sur mobile.
+Aucun choix préalable d’animation n’est obligatoire.
 
-**Pilotage.** Un résumé daté suit le choix du périmètre et précède les filtres de la liste. Les quatre repères
-principaux sont **Lots externes à retirer**, **Bons à utiliser**, **Coffrets à
-distribuer**, **Coffrets à utiliser**. Chaque valeur ouvre son filtre. Les coffrets
-à utiliser distinguent « jamais utilisés » et « utilisation commencée ».
-Un récapitulatif secondaire permet de consulter remis/consommés, clôturés,
-expirés, remplacés et unités encore sans gagnant. Les nombres ne proviennent
-jamais de la seule page affichée ; une mesure indisponible n’est pas zéro.
+**Pilotage.** Les quatre raccourcis **Lots externes à retirer**, **Bons à utiliser**,
+**Coffrets à distribuer** et **Coffrets à utiliser** précèdent la liste. Chaque valeur
+applique son filtre. **Détails** donne accès à la date d’observation, à la distinction
+entre coffrets jamais utilisés et dont l’utilisation a commencé, ainsi qu’aux
+autres états et unités sans gagnant. Les nombres portent sur toutes les pages
+du périmètre. Une mesure indisponible est affichée comme telle.
 
 **Liste.** Une ligne représente un gain courant, identifié par le bénéficiaire,
 le lot, sa nature, l’animation et son état, le lieu de retrait si connu, les
@@ -268,12 +266,14 @@ Filtres serveur : nature, état opérationnel, animation facultative, commerce
 de remise lorsqu’applicable, échéance avant une date, présence d’un rappel
 possible. Recherche par début de nom du bénéficiaire ou référence ; saisie
 privée conservée en mémoire, pas dans une URL ou un stockage persistant.
-Le filtre **Animation** réutilise un sélecteur paginé dans le périmètre choisi.
-Depuis la simplification du 15 novembre, les filtres sont alignés à gauche :
-Animation et Recherche restent visibles, les autres critères sont
-repliables dans « Filtres avancés » avec un compteur de critères actifs.
-Fermer ce volet ne modifie pas les filtres. Depuis le correctif du 22 novembre,
-la tâche sélectionnée reste aussi visible près de la liste ; les raccourcis
+Le champ **Nom ou référence** reste visible au-dessus des résultats,
+avec le bouton **Filtres**. Le volet se replie à la première ouverture et
+regroupe le [périmètre des animations](ux-productivite-organisateur.md#évolution-du-26-novembre-2026--filtre-des-animations-dans-suivre-lactivité),
+le sélecteur **Animation** paginé et les autres critères. Le titre de liste
+indique le périmètre sélectionné. Le bouton **Filtres** compte les critères
+actifs dans le volet, y compris un périmètre différent d’**Actives**. Fermer le
+volet conserve les critères, et une actualisation locale conserve son ouverture.
+La tâche sélectionnée reste visible au-dessus des résultats. Les raccourcis
 appliquent les règles de contexte décrites plus haut.
 
 **Intervenir.** L’action principale autorisée apparaît sur la ligne :
@@ -291,7 +291,7 @@ possible. Si la ligne sort du filtre, annoncer pourquoi et rendre le focus à
 la ligne suivante ou au titre de liste. Un conflit impose relecture et nouvelle
 confirmation ; une réponse perdue impose vérification du reçu.
 
-Chaque bloc visible possède son **Actualiser** à droite du titre. L’actualisation
+Les indicateurs et la liste ont chacun une action **Actualiser** près du titre. L’actualisation
 ne perd pas une saisie, une sélection ou une commande incertaine ; elle est
 différée ou explicitement protégée pendant la confirmation. Liste et résumé
 ont leurs erreurs locales. Les actions non autorisées sont absentes ou
@@ -618,7 +618,7 @@ de remise.
 
 | Critère | Comportement / propriétaire | Preuve attendue | Documentation, démonstration et exploitation |
 | --- | --- | --- | --- |
-| GL-01 | Entrée Lots et remises dans Suivre l’activité, commune/organisation visibles, sans sélection obligatoire d’animation | Navigateur bureau/mobile, lecteur/gestionnaire, lien direct et retour | Guide Animation et navigation ; fixture deux animations |
+| GL-01 | Entrée Lots et remises dans Suivre l’activité, commune dans la barre du portail, organisation dans le compte, sans sélection obligatoire d’animation | Navigateur bureau/mobile, lecteur/gestionnaire, lien direct et retour | Guide Animation et navigation ; fixture deux animations |
 | GL-02 | Liste globale des trois natures, y compris Coffret sans instance et archives, gains courants distincts des remplacés | API/SQL : trois natures, deux communes/organisations, archive et ancien gagnant ; aucune fuite | E41, projection et données historiques |
 | GL-03 | Compteurs exacts selon leurs unités, filtrés par contexte et datés, indépendants de la pagination et des filtres de tâche ; aucune assimilation clôture/remise/e-mail/consommation | Domaine des faits et tests de projection : partiel, zéro inconnu, expiré, révoqué, refus, gain/bon doublon, stock sans gagnant ; navigateur : quatre populations encore visibles après choix d'une tâche | Définitions ci-dessus ; fixture de chaque état, portée expliquée et couverture de projection |
 | GL-04 | Filtres/recherche/pagination serveur bornés, sans chargement de toutes les animations, bénéficiaires ou pages | API et PostgreSQL N/10N, curseur périmé/autre tenant, 25/100, plans et absence N+1 | E41 ; index et mesures de capacité |

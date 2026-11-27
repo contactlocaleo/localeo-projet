@@ -6283,3 +6283,41 @@ applique le périmètre avant chaque page et renvoie le nom et les dates, ce qui
 évite une seconde collecte du catalogue. La recherche et les compteurs Flyers
 chargent les pages du périmètre côté client. La recette locale n’inclut pas de
 mesure de capacité sous charge.
+
+## Disposition compacte de Lots et remises — 27 novembre 2026
+
+Le [correctif Animation](gestion-lots-remises.md#parcours-organisateur) retire le
+contexte répété dans l’en-tête. La recherche reste au-dessus du tableau. Le
+volet **Filtres** regroupe le périmètre des animations, l’édition et les autres
+critères. Il compte les critères actifs et conserve sa position pendant la
+relecture. Les quatre raccourcis restent visibles et **Détails** donne accès
+au reste de la synthèse.
+
+La recette locale utilise la base Animation `7e936e4` et les changements du
+répertoire de travail. Les positions sont mesurées depuis le haut de l’écran,
+avec les filtres repliés et les mêmes données fictives avant et après.
+
+| Largeur du viewport | Début de la première ligne avant | Après |
+| --- | ---: | ---: |
+| 1 280 px | 1 221 px | 517 px |
+| 390 px | 1 560 px | 556 px |
+| 320 px | 1 890 px | 701 px |
+
+- `node tests/browser/lots-remises.mjs` sur `tmp/lots-table-final-layout`
+  réussit les **128 scénarios** à 320, 390, 768, 1 024 et 1 280 px, ainsi qu’à
+  200 % de taille de texte. Le rapport `tmp/gl-lots-ui-captures-szxAWZ/report.json`
+  couvre la recherche, le focus, la pagination, les archives, les permissions,
+  les remises et les rappels. Le test de position échoue sur le build initial
+  `tmp/lots-table-before`.
+- `pnpm typecheck`, `pnpm lint`, `pnpm test` (443 tests) et le build PWA
+  synthétique réussissent. Vite garde son avertissement de taille de bundle.
+- Les captures du [guide Animation](../../produit/formation/animation/guide-quotidien-animation.md)
+  sont actualisées. Les 30 pages rendues, les 29 liens du sommaire et les
+  signets ont été relus. `pnpm guide:check` et `animation-guide.mjs --access-only`
+  vérifient l’égalité des PDF et l’accès au clavier dans le build local
+  `tmp/lots-table-verified-guide` à 390 et 1 024 px.
+
+Le correctif porte sur la présentation Animation et réutilise ses lectures,
+commandes et données existantes. Les scénarios synthétiques du portail
+suffisent à la recette de cette disposition. Le guide Commerçant documente la
+validation côté commerce et sa copie embarquée correspond à son PDF canonique.

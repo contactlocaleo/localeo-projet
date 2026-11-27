@@ -45,13 +45,15 @@ gagnant, distribuer un coffret, suivre un envoi, une remise ou une consommation,
 restez dans **Lots et remises**. Le choix des coffrets à mettre en jeu reste
 dans la préparation de l’animation.
 
-Dans **Lots et remises**, les filtres présentent d’abord **Animation** et **Bénéficiaire ou référence**.
-Ouvrez **Filtres avancés** pour préciser nature, état, échéance, possibilité de
-rappel ou commerce de remise. Le nombre affiché indique les critères avancés
-actifs ; fermer le volet les conserve. **Réinitialiser les filtres** les efface.
+Dans **Lots et remises**, utilisez la recherche **Nom ou référence** au-dessus
+de la liste. Ouvrez **Filtres** pour choisir les animations actives, archivées
+ou toutes, sélectionner une édition ou préciser la nature, l’état, l’échéance,
+la possibilité de rappel ou le commerce de remise. Le nombre affiché indique
+les critères actifs dans le volet. Vous pouvez le refermer et garder ces critères,
+ou choisir **Réinitialiser les filtres** pour les effacer.
 
-Les indicateurs distinguent les lots à retirer, les coffrets à distribuer et
-ceux dont il reste des prestations à utiliser. La clôture administrative d’un
+Les indicateurs permettent de filtrer la liste par tâche. Ouvrez **Détails** pour
+consulter les autres états et la date des chiffres. La clôture administrative d’un
 dossier ne signifie pas que son lot a été retiré. Filtrez la liste puis ouvrez
 le lot : les actions disponibles dépendent de vos droits et de son état actuel.
 Vous pouvez enregistrer une remise externe, une attestation, un retrait

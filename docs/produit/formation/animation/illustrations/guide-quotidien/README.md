@@ -1,5 +1,24 @@
 # Captures du guide utilisateur Animation
 
+## Retrouver les lots de plusieurs animations le 27 novembre 2026
+
+Le geste « Retrouver les lots et rappeler les bénéficiaires » utilise la
+[capture sur ordinateur](lots-remises-1024.png). Elle montre la recherche,
+le bouton **Filtres**, le périmètre actif et le premier lot. La
+[capture sur téléphone](lots-remises-390.png) présente les mêmes repères.
+
+Les captures proviennent du portail Animation construit depuis la base
+`7e936e4` avec le correctif local et des réponses API fictives. Depuis Animation,
+la recette écrit les captures et le relevé des requêtes dans un dossier local.
+
+```powershell
+$env:ANIMATION_TEST_DIST = 'tmp/lots-table-final-layout'
+$env:ANIMATION_GUIDE_ARTIFACTS = 'tmp/lots-table-guide-final'
+$env:ANIMATION_GUIDE_CAPTURE_ROOT = $env:ANIMATION_GUIDE_ARTIFACTS
+node scripts/build-pwa-tests.mjs
+node tests/browser/animation-guide.mjs --only=lots-remises --captures-only
+```
+
 ## Filtrer les tirages à venir le 27 novembre 2026
 
 Le portail construit depuis la base Animation `7e936e4` avec le correctif

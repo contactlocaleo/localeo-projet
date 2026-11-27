@@ -351,13 +351,21 @@ Attendez la clôture et vérifiez que les lots et les dossiers attendus sont pr�
 
 ![Vérifiez le gagnant dans le détail du gain. Dans le formulaire, indiquez le motif et confirmez la remise effective.](illustrations/guide-quotidien/remise-1024.png)
 
-### Suivre les retraits ou envoyer un rappel
+Après un tirage confirmé sans gagnant, **Fin et archivage** indique combien de lots restent à justifier. Ouvrez le dossier, choisissez **Justifier les lots sans gagnant** et saisissez le motif. Vérifiez la quantité avant de confirmer. Le dossier passe alors à **Justifié**.
+
+## 21 bis · Retrouver les lots et rappeler les bénéficiaires
+
+Ouvrez **Suivre l’activité → Lots et remises** pour retrouver les gains de plusieurs éditions.
+
+1. Recherchez un bénéficiaire ou une référence. Ouvrez **Filtres** pour choisir les animations **Actives**, **Archivées** ou **Toutes**, sélectionner une édition ou préciser les autres critères. Le bouton indique combien de critères du volet sont actifs. Refermez le volet pour retrouver la liste avec ces critères.
+2. Choisissez un indicateur pour afficher les lots correspondants. **Détails** donne accès aux autres états et à la date des chiffres. **Tous les lots** enlève le filtre de tâche et garde les autres critères.
+3. Pour rappeler des bénéficiaires, cochez les lots souhaités puis choisissez **Rappeler la sélection**. Vérifiez les destinataires dans l’aperçu avant de confirmer l’envoi. L’email et la remise sont suivis séparément.
+
+![La recherche et le bouton Filtres sont au-dessus de la liste. Le périmètre d’animations choisi est affiché près du titre.](illustrations/guide-quotidien/lots-remises-1024.png)
+
+Un lot externe se retire au lieu indiqué. Le commerce désigné valide un bon numérique avec son QR ou son PIN. Pour un coffret, lisez les prestations utilisées et celles qui restent lorsqu’elles sont connues.
 
 Choisissez **Ajouter un suivi** lorsque l’action est proposée. Renseignez le formulaire et choisissez **Enregistrer le suivi** pour consigner un événement dans l’historique du gain.
-
-Un lot externe se retire au lieu indiqué. Le commerce désigné valide un bon numérique avec son QR ou son PIN. Pour un coffret, lisez les prestations utilisées et celles qui restent lorsqu’elles sont connues. Pour un rappel, sélectionnez les destinataires et confirmez l’envoi. L’email et la remise sont suivis séparément.
-
-**Tous les lots** enlève le filtre de tâche et garde les autres critères. Après un tirage confirmé sans gagnant, **Fin et archivage** indique combien de lots restent à justifier. Ouvrez le dossier, choisissez **Justifier les lots sans gagnant** et saisissez le motif. Vérifiez la quantité avant de confirmer. Le dossier passe alors à **Justifié**.
 
 ## 22 · Faire le bilan et préparer une nouvelle édition
 
