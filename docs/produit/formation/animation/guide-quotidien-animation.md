@@ -233,11 +233,13 @@ Pour une tombola publique sur place, affichez aussi le code du jour. Il change �
 
 Vérifiez la commune active. Vous devez disposer de l’accès à **Communication communale**.
 
-1. Dans **Suivre l’activité**, ouvrez **Communication communale**, puis créez un message. Renseignez le titre et le texte.
+1. Dans **Suivre l’activité**, ouvrez **Communication communale**. Vérifiez les **Crédits disponibles**, puis choisissez **Nouveau message**. Renseignez le titre et le texte.
 2. Choisissez qui informer et lisez l’aperçu. Celui-ci indique combien d’appareils suivent la commune et ont activé **Infos de mes communes**.
 3. Confirmez **Envoyer maintenant**, puis ouvrez le bilan. Vérifiez le nombre de messages déposés dans Live et le nombre d’alertes envoyées aux appareils.
 
-![L’aperçu indique combien d’appareils sont concernés par les critères choisis.](illustrations/guide-quotidien/communication-communale-1024.png)
+![Vérifiez le nombre de crédits disponibles au-dessus de l’historique, puis choisissez Nouveau message.](illustrations/guide-quotidien/communication-communale-liste-1280.png)
+
+Pour retrouver un message, ouvrez **Filtres** au-dessus de l’historique. Le bouton d’information **Aide à la communication** présente les étapes et les conditions d’envoi.
 
 ### Si vous voulez préciser le public ou ajouter un lien
 

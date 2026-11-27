@@ -820,3 +820,23 @@ $env:ANIMATION_GUIDE_ARTIFACTS = 'tmp/bilan-guide-captures'
 node scripts/build-pwa-tests.mjs
 node tests/browser/animation-guide.mjs --only=bilan --captures-only
 ```
+
+## Communication communale le 27 novembre 2026
+
+La [capture de la liste](communication-communale-liste-1280.png) montre les
+crédits disponibles, l’aide et l’historique des messages dans le geste 14.
+Elle vient du portail construit sur la base `c3812d9` avec la nouvelle
+présentation et un message fictif servi par l’API simulée.
+
+Depuis `localeo-animation`, reconstruire le portail et rejouer le parcours.
+
+```powershell
+$env:ANIMATION_TEST_DIST = 'tmp/communale-organisation-dist'
+$env:ANIMATION_BROWSER_ARTIFACTS = 'tmp/communale-organisation-browser'
+$env:ANIMATION_TEST_SUPPORT = 'true'
+node scripts/build-generation-tests.mjs
+node tests/browser/communication-communale.mjs
+```
+
+Recopier `communication-communale-guide-1280.png` depuis le dossier des
+captures sous le nom `communication-communale-liste-1280.png`.

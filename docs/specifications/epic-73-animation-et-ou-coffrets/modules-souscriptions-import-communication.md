@@ -961,6 +961,13 @@ Communication communale** pour la commune active. Les campagnes de participants
 conservent leurs groupes, fenêtres et options de programmation. Les deux
 portées utilisent le droit `COMMUNICATION_PARTICIPANTS` et le même quota.
 
+La liste communale présente la commune active et la même jauge de **Crédits
+disponibles** que **Messages aux participants**. L’aide communale s’ouvre
+depuis **Aide à la communication** et explique les étapes et le quota partagé.
+Les filtres d’état et de dates se déplient depuis l’historique. Le bouton
+indique quand des filtres sont actifs. L’actualisation de la liste préserve
+la saisie des filtres, leur ouverture et le focus.
+
 ### Parcours et données
 
 - Le gestionnaire habilité enregistre un titre, un texte et un lien facultatif
