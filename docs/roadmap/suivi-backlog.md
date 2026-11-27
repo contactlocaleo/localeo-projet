@@ -1,5 +1,7 @@
 # Suivi backlog
 
+**27 novembre 2026 — EPIC 87, À faire.** Les treize critères couvrent les trois modes de déclenchement, les pannes, la supervision quotidienne de tous les éléments par batch, type et état dans Ops, et la bascule par environnement. [Backlog](a-faire/epic-87-ordonnancement-postgresql-supervision-batchs-backlog.md)
+
 **26 novembre 2026 — EPIC 86, À faire.** Neuf critères portent sur l’accès support autonome, la lecture seule du menu client, la révocation, l’audit et la charge globale. [Backlog](a-faire/epic-86-support-autonome-lecture-seule-backlog.md)
 
 **25 novembre 2026 — EPIC 85, En cours.** Douze critères couvrent le parcours organisateur et sa recette sur les modèles implémentés. [Backlog et maquettes](en-cours/epic-85-parcours-organisateur-backlog.md)
@@ -35,8 +37,8 @@ Le classement courant est dans la [roadmap commune](README.md). Le suivi des EPI
 
 Évolution transverse du 29 septembre 2026 : [PWA-20260929 — installation et mise à jour](../specifications/installation-mise-a-jour-pwa.md), appliquée aux sept PWA existantes. Les états et clôtures historiques des EPIC restent inchangés ; preuves locales et recette appareil sont distinguées dans la spécification.
 
-- 89 identifiants EPIC suivis, dont 86 du tronc commun et 3 identifiants applicatifs distincts.
-- 9 EPIC à faire et 12 en cours.
+- 90 identifiants EPIC suivis, dont 87 du tronc commun et 3 identifiants applicatifs distincts.
+- 10 EPIC à faire et 12 en cours.
 - EPICs fusionnees : 1 (EPIC-61 vers EPIC-60).
 - EPICs terminees : 65 (63 du tronc commun et 2 applicatives) ; EPICs abandonnees : 2.
 - US / PRD detaillees dans le tableau historique : 415, jusqu'a `EPIC-45`.
@@ -44,14 +46,14 @@ Le classement courant est dans la [roadmap commune](README.md). Le suivi des EPI
 - Référence de pilotage · [EPIC à faire](a-faire/README.md), [EPIC en cours](en-cours/README.md) et [EPIC terminées](terminees/README.md).
 - Classement et motifs : [index de la roadmap](README.md).
 - Le tableau detaille des US ci-dessous reste un historique consolide. Pour les
-  epics 46 à 86, les backlogs dédiés portent le détail et le tableau `Sources
+  epics 46 à 87, les backlogs dédiés portent le détail et le tableau `Sources
   consolidees` porte l'etat global courant.
 
 ### Repartition des EPICs par etat retenu
 
 | Etat | Nombre |
 | --- | ---: |
-| A faire | 9 |
+| A faire | 10 |
 | En cours | 12 |
 | Abandonne | 2 |
 | Fusionnee | 1 |
@@ -697,3 +699,4 @@ anciennes US restent historiques.
 | EPIC-84 | En cours | [Adhérents hors commune dans Localeo Animation](en-cours/epic-84-adherents-hors-commune-animation-backlog.md), critères HC-01 à HC-09. |
 | EPIC-85 | En cours | [Parcours organisateur et maquettes](en-cours/epic-85-parcours-organisateur-backlog.md), critères E85-CA-01 à E85-CA-12. |
 | EPIC-86 | A faire | [Support autonome en lecture seule dans Animation et Pro](a-faire/epic-86-support-autonome-lecture-seule-backlog.md), critères E86-CA-01 à E86-CA-09. |
+| EPIC-87 | A faire | Ordonnancement PostgreSQL et supervision dans Localeo Ops, critères E87-CA-01 à E87-CA-13. [Backlog](a-faire/epic-87-ordonnancement-postgresql-supervision-batchs-backlog.md) |

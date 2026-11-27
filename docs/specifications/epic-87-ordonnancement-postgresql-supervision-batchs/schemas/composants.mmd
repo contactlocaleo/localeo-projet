@@ -1,0 +1,40 @@
+---
+config:
+  theme: neutral
+  themeCSS: ".edgeLabel rect.background { fill: #ffffff !important; opacity: 1 !important; }"
+  fontFamily: "Segoe UI, Arial, sans-serif"
+  flowchart:
+    htmlLabels: false
+    curve: linear
+    nodeSpacing: 28
+    rankSpacing: 40
+---
+flowchart TB
+    accTitle: Composants de l’ordonnancement PostgreSQL
+    accDescr: Les producteurs confirment le travail dans PostgreSQL. Le coordinateur élu de FastAPI consulte la base et déclenche le BatchRunner par HTTP interne. Le domaine produit les effets et conserve les preuves. Localeo Ops les lit sous session ADMIN.
+    producteur["API, ERP et webhooks"]
+    base[("PostgreSQL<br/>Intentions et preuves<br/>Passages et baux")]
+    leader["Coordinateur FastAPI<br/>Leader élu par bail"]
+    runner["BatchRunner<br/>Verrou par code batch"]
+    domaine["Services métier<br/>Éligibilité et effets"]
+    externe["Fournisseurs<br/>Brevo, Web Push, Stripe"]
+    lecture["API privée de Localeo Ops"]
+    ops["Localeo Ops · ADMIN<br/>File de traitement"]
+
+    producteur -->|"Écriture atomique"| base
+    base <-->|"Écoute et relecture"| leader
+    leader -->|"HTTP interne protégé"| runner
+    runner --> domaine
+    domaine -->|"Résultats et preuves"| base
+    domaine <-->|"Remise ou interrogation"| externe
+    base -->|"Données autorisées"| lecture
+    lecture --> ops
+
+    classDef stockage fill:#deeff3,stroke:#356879,color:#143f50
+    classDef backend fill:#eaf0fa,stroke:#4b6892,color:#253d5b
+    classDef metier fill:#e9f3e9,stroke:#4a7157,color:#214932
+    classDef interface fill:#f5f3ee,stroke:#766c5b,color:#443d32
+    class base stockage
+    class leader,runner,lecture backend
+    class domaine metier
+    class producteur,externe,ops interface

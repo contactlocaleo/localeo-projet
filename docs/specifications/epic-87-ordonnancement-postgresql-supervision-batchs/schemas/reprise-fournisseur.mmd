@@ -1,0 +1,46 @@
+---
+config:
+  theme: base
+  fontFamily: "Segoe UI, Arial, sans-serif"
+  themeVariables:
+    actorBkg: "#eaf0fa"
+    actorBorder: "#4b6892"
+    actorTextColor: "#253d5b"
+    actorLineColor: "#83919e"
+    signalColor: "#354d61"
+    signalTextColor: "#253d5b"
+    labelBoxBkgColor: "#f4f6f8"
+    labelBoxBorderColor: "#8493a2"
+    labelTextColor: "#263a4a"
+    loopTextColor: "#253d5b"
+    noteBkgColor: "#fff3d9"
+    noteBorderColor: "#936b30"
+    noteTextColor: "#553d1e"
+  sequence:
+    mirrorActors: false
+    diagramMarginX: 18
+    actorMargin: 65
+    width: 160
+    height: 44
+---
+sequenceDiagram
+    accTitle: Reprise d’une remise Web Push par destination
+    accDescr: Le service valide l’engagement en base avant l’appel externe. Selon la preuve, il enregistre une acceptation, un réessai daté ou une issue à rapprocher. Une réponse perdue après un envoi possible conserve cette destination à rapprocher.
+    participant S as Service métier
+    participant P as PostgreSQL
+    participant F as Fournisseur Web Push
+
+    S->>P: Réserver la destination avec le jeton de tentative
+    S->>P: Valider l’engagement de la remise
+    P-->>S: Commit confirmé
+    S->>F: Remettre le message
+    alt Acceptation attestée
+        F-->>S: Acceptation
+        S->>P: Enregistrer la remise acceptée
+    else Refus temporaire certain
+        F-->>S: Refus temporaire
+        S->>P: Enregistrer le prochain essai autorisé
+    else Réponse perdue ou arrêt après l’appel
+        Note over S,P: À la reprise, relire l’engagement et les preuves
+        S->>P: Enregistrer « À rapprocher » pour cette destination
+    end

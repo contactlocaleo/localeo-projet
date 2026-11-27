@@ -4,7 +4,9 @@ Spécifications V1 du 5 octobre : [E70 — PIN](../../specifications/epic-70-val
 
 [Retour à la roadmap](../README.md)
 
-Neuf EPIC sont classées à faire. Les bilans techniques et réserves de chaque backlog restent conservés.
+Dix EPIC sont classées à faire. Les bilans techniques et réserves de chaque backlog restent conservés.
+
+- **EPIC 87 — Ordonnancement PostgreSQL et supervision dans Localeo Ops.** Six stories couvrent la migration des batchs, le diagnostic et la reprise ciblée. [Backlog](epic-87-ordonnancement-postgresql-supervision-batchs-backlog.md)
 
 - [EPIC 86 — Support autonome en lecture seule dans Animation et Pro](epic-86-support-autonome-lecture-seule-backlog.md) · Compte nominatif, passkey, portée par produit et menu client complet. Neuf critères couvrent les accès, l’audit et la charge globale.
 

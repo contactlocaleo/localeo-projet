@@ -1,0 +1,38 @@
+---
+config:
+  theme: neutral
+  fontFamily: "Segoe UI, Arial, sans-serif"
+  flowchart:
+    htmlLabels: false
+    curve: linear
+    nodeSpacing: 28
+    rankSpacing: 40
+---
+flowchart TB
+    accTitle: Trois modes de déclenchement, une admission durable
+    accDescr: Une file est relue sur signal ou balayage. Un intervalle conserve une période et une phase. Un calendrier traduit une heure civile en créneau UTC. Les trois modes matérialisent un passage en PostgreSQL avant l’admission par le BatchRunner.
+    file["File métier<br/>Email prêt à envoyer"]
+    intervalle["Intervalle<br/>Suivi des SMS<br/>aux minutes paires"]
+    calendrier["Calendrier<br/>Relance de coffrets<br/>à 07 h 30 à Paris"]
+    reveil["LISTEN / NOTIFY<br/>ou balayage toutes les 30 s<br/>Relire les éléments éligibles"]
+    phase["Période et phase fixes<br/>Dernière fenêtre couverte"]
+    creneau["Heure civile et fuseau<br/>Identité du créneau en UTC"]
+    passage[("Occurrence du passage dû<br/>Inscrite dans PostgreSQL")]
+    admission["BatchRunner<br/>Admission de la tentative"]
+
+    file --> reveil
+    intervalle --> phase
+    calendrier --> creneau
+    reveil --> passage
+    phase --> passage
+    creneau --> passage
+    passage --> admission
+
+    classDef signal fill:#eaf0fa,stroke:#4b6892,color:#253d5b
+    classDef regle fill:#f8fafc,stroke:#91a2b4,color:#253d5b
+    classDef stockage fill:#deeff3,stroke:#356879,color:#143f50
+    classDef execution fill:#e9f3e9,stroke:#4a7157,color:#214932
+    class file,intervalle,calendrier signal
+    class reveil,phase,creneau regle
+    class passage stockage
+    class admission execution

@@ -1,0 +1,35 @@
+---
+config:
+  theme: neutral
+  themeCSS: ".edgeLabel rect.background { fill: #ffffff !important; opacity: 1 !important; }"
+  fontFamily: "Segoe UI, Arial, sans-serif"
+  flowchart:
+    htmlLabels: false
+    curve: linear
+    nodeSpacing: 28
+    rankSpacing: 40
+---
+flowchart TB
+    accTitle: Du profil de batch à la preuve par élément
+    accDescr: Une planification peut produire plusieurs occurrences et une occurrence plusieurs tentatives. Un lancement manuel entre aussi par le runner. Chaque exécution est reliée aux décisions sur les éléments. La référence métier reste stable entre les tentatives.
+    profil["Planification<br/>Profil et code batch"]
+    occurrence["Occurrence<br/>Passage pour ce profil"]
+    manuel["Lancement manuel<br/>Acteur identifié"]
+    execution["Exécution du batch<br/>Verrou partagé par code"]
+    element["Élément métier<br/>Type, unité et référence"]
+    decision[("Décision par élément<br/>Étape, date, issue et motif")]
+
+    profil -->|"0 à plusieurs passages"| occurrence
+    occurrence -->|"Tentative avec jeton"| execution
+    manuel --> execution
+    execution -->|"0 à plusieurs décisions"| decision
+    element -->|"Référence stable"| decision
+
+    classDef controle fill:#eaf0fa,stroke:#4b6892,color:#253d5b
+    classDef stockage fill:#deeff3,stroke:#356879,color:#143f50
+    classDef metier fill:#e9f3e9,stroke:#4a7157,color:#214932
+    classDef acteur fill:#f5f3ee,stroke:#766c5b,color:#443d32
+    class profil,occurrence,execution controle
+    class decision stockage
+    class element metier
+    class manuel acteur

@@ -1,5 +1,7 @@
 # Roadmap par etat
 
+**27 novembre 2026 — EPIC 87, À faire.** Migrer les batchs vers trois modes de déclenchement PostgreSQL. Dans Localeo Ops, un administrateur pourra retrouver tous les éléments d’un batch dans la journée, distinguer ceux traités, en erreur ou en retard et demander une reprise ciblée. [Cadrage](a-faire/epic-87-ordonnancement-postgresql-supervision-batchs-backlog.md) · [Spécification et matrice de migration](../specifications/epic-87-ordonnancement-postgresql-supervision-batchs/README.md)
+
 **26 novembre 2026 — EPIC 86, À faire.** Accès support autonome à Localeo
 Animation et Pro avec un compte nominatif, une passkey et une portée par produit.
 Consultation du menu client en lecture seule, audit des lectures et mesure de
@@ -261,12 +263,12 @@ Le bilan conserve la dette préexistante de lecture bornée et les actions de li
 
 Classement consolidé le 18 septembre 2026, complété le 22 octobre par les EPIC 74 et 75. Les backlogs des applications sont
 réunis dans les dossiers d'état, avec un seul fichier par EPIC. Le suivi inclut
-les 86 identifiants du tronc commun et trois identifiants applicatifs distincts.
+les 87 identifiants du tronc commun et trois identifiants applicatifs distincts.
 
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
 | Terminees | 65 | [terminees/](terminees/README.md) |
-| A faire | 9 | [a-faire/](a-faire/README.md) |
+| A faire | 10 | [a-faire/](a-faire/README.md) |
 | En cours | 12 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
@@ -469,6 +471,7 @@ précise la provenance et les divergences historiques conservées.
 | 84 | En cours | [Adhérents hors commune dans Localeo Animation](en-cours/epic-84-adherents-hors-commune-animation-backlog.md). Saisie, import, participation en magasin, agendas Live et renouvellement du réseau. |
 | 85 | En cours | [Parcours organisateur et maquettes](en-cours/epic-85-parcours-organisateur-backlog.md). Refonte des onglets et du contenu des fiches d’animation. |
 | 86 | A faire | [Support autonome en lecture seule dans Animation et Pro](a-faire/epic-86-support-autonome-lecture-seule-backlog.md) · Compte nominatif, passkey, menu client complet, audit des lectures et budgets de charge. |
+| 87 | A faire | [Ordonnancement PostgreSQL et supervision des batchs dans Localeo Ops](a-faire/epic-87-ordonnancement-postgresql-supervision-batchs-backlog.md) |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |
 
 Les changements des Epics 5, 12 et 47 corrigent des incoherences entre les

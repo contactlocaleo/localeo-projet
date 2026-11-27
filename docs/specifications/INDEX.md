@@ -1,5 +1,7 @@
 # Spécifications
 
+- **EPIC 87 — Ordonnancement PostgreSQL et supervision des batchs dans Localeo Ops**, À faire. [Architecture et recette](epic-87-ordonnancement-postgresql-supervision-batchs/README.md) · [Schémas d’architecture](epic-87-ordonnancement-postgresql-supervision-batchs/schemas-architecture.md) · [Migration par batch](epic-87-ordonnancement-postgresql-supervision-batchs/migration-par-batch.md)
+
 - **E73 — Carnet et notifications Live**, [critères LCN-01 à LCN-05](epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#e73-evo-live-carnet-notifications) et [recette](epic-73-animation-et-ou-coffrets/verification-livraison.md#carnet-et-notifications-live--26-novembre-2026). Masquage réversible des éléments du carnet et suppression d’une entrée de notifications sur l’installation courante.
 
 - **EPIC 85 — Parcours organisateur dans Localeo Animation**, En cours. Du choix du modèle à la publication, au suivi, à la clôture, au tirage applicable et aux remises. [Spécification, maquettes et recette par modèle](epic-85-parcours-organisateur/README.md)
@@ -136,6 +138,7 @@ Les dossiers dédiés portent l’identifiant complet de leur epic en préfixe. 
 | 83 | [Clés d’accès dans Localeo Pro](epic-83-cles-acces-localeo-pro/README.md) | En cours | Backend Identité et accès, Localeo Pro, Localeo Ops |
 | 84 | [Adhérents hors commune dans Localeo Animation](epic-84-adherents-hors-commune-animation/README.md) | En cours | Backend, Animation, Commerçant et Marketplace/Live |
 | 85 | [Parcours organisateur dans Localeo Animation](epic-85-parcours-organisateur/README.md) | En cours | Animation et backend ERP |
+| 87 | [Ordonnancement PostgreSQL et supervision dans Localeo Ops](epic-87-ordonnancement-postgresql-supervision-batchs/README.md) | À faire | Backend, ERP et Localeo Ops |
 
 ## Contrats et historique
 

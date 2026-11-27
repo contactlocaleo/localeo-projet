@@ -1,0 +1,38 @@
+---
+config:
+  theme: neutral
+  fontFamily: "Segoe UI, Arial, sans-serif"
+  flowchart:
+    htmlLabels: false
+    curve: linear
+    nodeSpacing: 28
+    rankSpacing: 40
+---
+flowchart TB
+    accTitle: Transfert de l’autorité de déclenchement en production
+    accDescr: La stratégie prévue bascule les profils par vagues. La variante à arbitrer les bascule tous ensemble. Le périmètre retenu suit une seule séquence de suspension des admissions, drainage ou qualification des travaux engagés, transfert de l’autorité et reprise du travail dû.
+    vagues["Stratégie prévue<br/>Par vagues de profils"]
+    unique["Variante à arbitrer<br/>Tous les profils actifs"]
+    fermer["Suspendre les admissions<br/>du périmètre choisi"]
+    drainer["Terminer les lots engagés<br/>ou qualifier leur issue"]
+    autorite[("Transfert d’autorité en base<br/>Curseurs et reçus conservés")]
+    reprendre["Coordinateur actif<br/>LISTEN puis relecture"]
+    ops["Vérifier dans Localeo Ops<br/>par profil et par élément"]
+
+    vagues --> fermer
+    unique --> fermer
+    fermer --> drainer
+    drainer --> autorite
+    autorite --> reprendre
+    reprendre --> ops
+
+    classDef reference fill:#eaf0fa,stroke:#4b6892,color:#253d5b
+    classDef option fill:#fff3d9,stroke:#936b30,color:#553d1e
+    classDef etape fill:#f4f6f8,stroke:#708092,color:#283a4a
+    classDef stockage fill:#deeff3,stroke:#356879,color:#143f50
+    classDef actif fill:#e9f3e9,stroke:#4a7157,color:#214932
+    class vagues reference
+    class unique option
+    class fermer,drainer etape
+    class autorite stockage
+    class reprendre,ops actif

@@ -1,0 +1,42 @@
+---
+config:
+  theme: neutral
+  fontFamily: "Segoe UI, Arial, sans-serif"
+  flowchart:
+    htmlLabels: false
+    curve: linear
+    nodeSpacing: 28
+    rankSpacing: 40
+---
+flowchart TB
+    accTitle: Construction de la vue Aujourd’hui dans Localeo Ops
+    accDescr: Les échéances et reports sont réunis avec l’activité attestée et les preuves des résultats. Le backend sélectionne la journée civile de Paris et déduplique les références selon l’unité. Chaque compteur ouvre la liste puis le détail des mêmes éléments.
+    stock[("Intentions et échéances<br/>Travail prévu, dû ou reporté")]
+    activite[("Activité et résultats<br/>Historique métier ou reçus")]
+    jour["Lecture privée Ops<br/>Journée civile de Paris"]
+    selection["Références distinctes<br/>Batch, type, unité, étape"]
+    etats["État à l’heure de mesure<br/>À traiter ou en cours<br/>En erreur ou à rapprocher"]
+    succes["Succès du jour<br/>Traités aujourd’hui<br/>dont traités en retard"]
+    retard["En retard actuellement<br/>Jalon ouvert au-delà<br/>de sa date limite"]
+    liste["Liste filtrée puis détail<br/>Référence, heures et motif"]
+
+    stock --> jour
+    activite --> jour
+    jour --> selection
+    selection --> etats
+    selection --> succes
+    selection --> retard
+    etats --> liste
+    succes --> liste
+    retard --> liste
+
+    classDef stockage fill:#deeff3,stroke:#356879,color:#143f50
+    classDef lecture fill:#eaf0fa,stroke:#4b6892,color:#253d5b
+    classDef mesure fill:#f4f6f8,stroke:#708092,color:#283a4a
+    classDef delai fill:#fff3d9,stroke:#936b30,color:#553d1e
+    classDef ok fill:#e9f3e9,stroke:#4a7157,color:#214932
+    class stock,activite stockage
+    class jour,selection,liste lecture
+    class etats mesure
+    class succes ok
+    class retard delai
