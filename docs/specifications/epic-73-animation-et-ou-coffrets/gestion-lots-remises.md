@@ -66,9 +66,13 @@ toutes les pages pour les classer.
 
 | Filtre présenté | Groupe API | Fait observable et action |
 | --- | --- | --- |
-| Prêts à être effectués | `PRET` | Le serveur propose l’action `TIRER`. Un statut clôturé seul ne suffit pas à déclarer un tirage prêt. |
-| À venir | `A_VENIR` | Tirage non confirmé qui n’est pas prêt : état réel à venir, en attente, en préparation ou bloqué conservé, avec son motif lorsqu’il est disponible. Aucun nouveau lancement n’est proposé pendant une préparation ou un blocage. |
+| Prêts à lancer | `PRET` | Le serveur propose l’action `TIRER`. Un statut clôturé seul ne suffit pas à déclarer un tirage prêt. |
+| À venir | `A_VENIR` | Depuis le 27 novembre 2026, seuls les tirages à préparer, à suivre ou à vérifier d’animations clôturées sans date de tirage annoncée sont sélectionnés. |
 | Effectués | `EFFECTUE` | Confirmation de tirage enregistrée et datée. Une demande en cours ou une opération simplement acceptée ne vaut pas tirage effectué. |
+
+La restriction de clôture et de date s’applique au filtre `groupe=A_VENIR`.
+**Tous les tirages** donne aussi accès aux animations en cours et aux tirages
+dont une date est déjà annoncée, selon le périmètre d’animations choisi.
 
 La liste montre l’animation, son état de tirage et les dates utiles. L’action
 ouvre l’onglet **Tirage** de la fiche Animation existante ; elle n’exécute pas
@@ -86,8 +90,10 @@ et ne lance aucune de ces opérations.
   contexte précédent.
 - Les lots externes, les bons numériques et les coffrets sont couverts, sans
   réintroduire de filtre ou de panneau de suivi Coffrets dans Tirages.
-- Un tirage en attente, en préparation ou bloqué reste visible dans À venir,
-  avec son état réel ; seule une confirmation datée figure dans Effectués.
+- Le serveur filtre les animations clôturées sans date de tirage avant la
+  pagination d’**À venir**. Une annonce absente ou une date retirée répond à ce
+  critère. Les lignes conservent leur état réel et leur motif disponible.
+- Seule une confirmation datée figure dans **Effectués**.
 - Le groupe Prêts repose sur l’action serveur `TIRER` et l’ouverture de la fiche
   conserve les confirmations, les droits et l’idempotence existants.
 - Le menu, les accès directs `/tirages`, le mobile, le clavier, le zoom et les

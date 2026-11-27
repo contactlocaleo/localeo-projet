@@ -1,6 +1,6 @@
 # Localeo Animation - Votre guide au quotidien
 
-<!-- Source canonique du PDF. Générateur dans localeo-animation/scripts/generate-animation-guide.py. Édition du 26 novembre 2026. Les captures montrent l’application réelle avec des données fictives. -->
+<!-- Source canonique du PDF. Générateur dans localeo-animation/scripts/generate-animation-guide.py. Édition du 27 novembre 2026. Les captures montrent l’application réelle avec des données fictives. -->
 
 <!-- Sommaire : Prendre en main votre espace -->
 
@@ -272,6 +272,12 @@ Vérifiez le commerce et la consigne attendue avant d’agir sur une étape ou u
 ![Le filtre Animations détermine les éditions disponibles dans le champ Animation et les participants affichés.](illustrations/guide-quotidien/participants-global-1024.png)
 
 Validations, Tirages, Lots et remises, Messages habitants, Flyers et Bilans proposent aussi le filtre **Animations**.
+
+### Retrouver les tirages dont la date reste à annoncer
+
+Dans **Suivre l’activité → Tirages**, choisissez **À venir**. Ce filtre affiche les tirages des animations clôturées dont la date reste à annoncer. Pour retrouver un tirage déjà daté, choisissez **Tous les tirages**.
+
+![Avec le filtre À venir, vérifiez que la colonne Date annoncée indique Date à annoncer.](illustrations/guide-quotidien/tirages-a-venir-1280.png)
 
 ## 17 · Modifier les réglages d’une animation publiée
 

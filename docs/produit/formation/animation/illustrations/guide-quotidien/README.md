@@ -1,5 +1,17 @@
 # Captures du guide utilisateur Animation
 
+## Filtrer les tirages à venir le 27 novembre 2026
+
+Le portail construit depuis la base Animation `7e936e4` avec le correctif
+local affiche **À venir** et le résultat d’une animation fictive clôturée
+dont la date reste à annoncer. Le PDF utilise la
+[capture sur ordinateur](tirages-a-venir-1280.png). La recette produit aussi
+une [capture sur téléphone](tirages-a-venir-390.png).
+
+Depuis le dépôt Animation, lancer `node tests/browser/tirages-global.mjs`.
+La recette construit le portail, joue le parcours avec des réponses
+API fictives et écrit les captures dans `tmp/tirages-global-*`.
+
 ## Filtrer les participants de plusieurs éditions le 26 novembre 2026
 
 Le portail construit depuis la base Animation `bc1c9ae` avec l’évolution
