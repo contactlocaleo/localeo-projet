@@ -30,6 +30,13 @@ Le dossier affiche d’abord **Animation seule**, **Coffrets**, **Animation et
 Coffrets** ou **Produits à qualifier**, puis les points à traiter en priorité.
 Le périmètre demandé reste distinct du statut d’activation du commerçant.
 
+Le taux de **Complétion du dossier** indique la part des contrôles obligatoires
+validés pour ce périmètre. Le détail donne le nombre de contrôles validés et
+attendus. Si Coffrets est ajouté à un dossier Animation déjà terminé, le taux
+reflète les compléments à préparer dès la prochaine lecture. Les profils
+autorisés retrouvent le palier enregistré sous **Avancement acquis** dans
+les détails.
+
 - Ouvrir un point signalé pour accéder directement à sa rubrique. Pour Animation
   seule, les raccourcis **Coordonnées** et **Accès Pro** donnent accès au parcours
   court ; contrat, Stripe et prestations Coffrets ne sont pas proposés.

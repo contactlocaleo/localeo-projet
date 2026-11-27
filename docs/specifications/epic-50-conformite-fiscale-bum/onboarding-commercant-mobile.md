@@ -2,10 +2,36 @@
 
 Évolution du 29 septembre 2026 : [installation et mise à jour PWA](../installation-mise-a-jour-pwa.md), depuis le header OnBoard. Les liens d'entrée historiques et les droits restent conservés ; l'installation utilise le point d'entrée canonique dans le scope de l'application.
 
+## Complétion du dossier par périmètre — 26 novembre 2026
+
+Le taux principal dans OnBoard et l’ERP correspond à `currentProgress`. Il
+compte les contrôles obligatoires satisfaits parmi ceux qui s’appliquent au
+périmètre demandé ou ouvert. Le calcul utilise la checklist courante et ses
+preuves autorisées, avec un arrondi à une décimale. Animation seule peut
+atteindre 100 % avec l’identité, l’adresse, le contact et l’accès Pro vérifiés.
+L’ajout de Coffrets fait entrer ses exigences applicables dans le calcul dès
+la lecture suivante, y compris pour un dossier clos. Les dossiers à qualifier
+suivent les exigences historiques. [Critères OA-02 à OA-04](../epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md#évolution-du-1er-novembre-2026--e73-evo-onboarding-animation-simple)
+
+Liste OnBoard, détail OnBoard et fiche ERP partagent les objets
+`{completed, total, rate}`. `currentProgress` présente la complétion
+courante. `progress` représente le palier enregistré pour les sessions
+historiques et la complétion autorisée pour les comptes nominatifs. Ces rôles
+appliquent les règles de lecture documentaire de l’E69. Les éléments
+recommandés ou hors périmètre sont exclus du calcul.
+
+Les lectures projettent le taux et les blocages à partir des faits existants.
+Les preuves enregistrées, le palier acquis et le statut du dossier sont
+conservés. `currentCompletionRate` désigne une moyenne du portefeuille. Elle
+agrège les paliers enregistrés pour les sessions historiques et les
+complétions autorisées pour les comptes nominatifs. Dans cette même réponse
+de portefeuille, `topBlockers` suit les diagnostics enregistrés pour les
+sessions historiques et les contrôles autorisés pour les comptes nominatifs.
+
 ## Avancement acquis et réponses obsolètes — 26 septembre 2026
 
-Le pourcentage présenté dans Localeo OnBoard représente désormais l’**avancement
-acquis** du dossier. Le domaine conserve le meilleur palier atteint, y compris
+La livraison du 26 septembre présentait l’**avancement acquis** comme taux
+principal. Le domaine conserve le meilleur palier atteint, y compris
 après un rechargement, une réouverture ou une modification des données. Les
 contrôles recommandés du catalogue et les éléments non applicables ne participent
 plus au calcul de l’avancement courant de l’inscription.
@@ -26,11 +52,10 @@ connue ; aucune attribution à des données distantes n’est affirmée.
 
 - `progress: {completed, total, rate}` expose le palier acquis. Les compteurs
   désignent le palier historique, pas la checklist actuelle.
-- `currentProgress: {completed, total, rate}` expose les seuls contrôles
-  obligatoires applicables du dernier diagnostic.
-- Liste et détail utilisent le taux serveur ; les indicateurs de portefeuille
-  agrègent les mêmes paliers via le champ conservé `currentCompletionRate`.
-  Les blocages agrégés restent les blocages actuels.
+- Le contrat de septembre exposait le dernier diagnostic dans
+  `currentProgress`. La lecture courante par périmètre le remplace depuis le
+  correctif du 26 novembre.
+- La liste et le détail utilisent le taux calculé par le serveur.
 - La PWA ignore les lectures dépassées et les réponses d’un autre dossier ;
   la version empêche une réponse de commande ancienne de remplacer une récente.
   **Actualiser** relit aussi le détail sélectionné.
@@ -76,9 +101,11 @@ Commerçant partagent cette source et sa validation.
 `GET /internal/onboard/api/dossiers` conserve le champ `dossiers` et ajoute
 `pagination: {page, taille, total}`. La page commence a 1; la taille par defaut
 est 50, bornee entre 1 et 100. Le tri est `updated_at DESC, id DESC`.
-Tous les filtres, y compris le code de blocage dans la checklist, et le
-perimetre territorial sont appliques avant le total et la pagination SQL.
-La liste charge uniquement les champs du resume, sans preparation financiere.
+Le périmètre territorial, la recherche et les filtres SQL précèdent le
+comptage et la lecture de la page. Le filtre par blocage examine les
+contrôles courants des candidats par lots de 100 avant de déterminer le
+total et les résultats de la page. Le résumé utilise les faits groupés
+nécessaires à ce calcul.
 
 Localeo OnBoard affiche le total et les boutons Precedent/Suivant. Changer un
 filtre revient a la premiere page; les requetes devenues inutiles sont annulees.
