@@ -821,6 +821,12 @@ node scripts/build-pwa-tests.mjs
 node tests/browser/animation-guide.mjs --only=bilan --captures-only
 ```
 
+## Visuel de l’animation le 28 novembre 2026
+
+`visuel-animation-1280.png` montre **Publication → Visuel de l’animation** à 1 280 px dans l’application, sur la base `60832f9` avec l’évolution E85-EVO-VISUEL. La fiche est fictive et les trois WebP proviennent du manifeste du modèle Passeport commerçant. **Passage validé en boutique** est déjà enregistré. Les deux aperçus indiquent l’usage du paysage pour la fiche et les cartes **Découvrir**, et du carré pour les listes compactes de Live.
+
+Depuis le portail, construire le bundle isolé avec `node scripts/build-pwa-tests.mjs` et `ANIMATION_TEST_DIST=tmp/e85-visuel-decouvrir-guide-dist`. Lancer `node tests/browser/flyer-navigation.mjs` avec le même répertoire de build, `ANIMATION_VISUAL_GUIDE_ONLY=1` et `ANIMATION_VISUAL_MANIFEST` pointant vers le manifeste des visuels dans le backend. La recette simule la session et les API de la fiche sur un port local éphémère.
+
 ## Communication communale le 27 novembre 2026
 
 La [capture de la liste](communication-communale-liste-1280.png) montre les

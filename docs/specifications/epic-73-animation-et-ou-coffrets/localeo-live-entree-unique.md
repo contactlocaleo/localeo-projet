@@ -2341,6 +2341,8 @@ du 8 novembre sont consignés au bilan et ne valent pas déploiement.
 
 ## Évolution du 8 novembre 2026 — performance des lectures Live (E73-EVO-LIVE-PERFORMANCE)
 
+**Complément du 28 novembre 2026.** Le visuel choisi dans **Publication → Visuel de l’animation** alimente les vignettes et la fiche. **Découvrir → Animations** utilise le paysage de 480 × 270 px et 35 Kio maximum en couverture. **Ses animations** sur la fiche commerce demande le carré de 216 px et 15 Kio maximum. Pour E73-LH-08 et E73-LP-11, le pictogramme garde l’espace du bandeau annoncé en cas d’erreur et reste compact quand aucun visuel n’est prévu. La visibilité et le choix courant sont vérifiés à la lecture. [Rendu et recette E85-EVO-VISUEL](../epic-85-parcours-organisateur/visuel-animation.md#couverture-des-cartes-découvrir-dans-live)
+
 **Spécification demandée, implémentation non engagée dans cette phase.** Cette
 évolution traite tous les constats API-01 à API-08 et LIVE-01 à LIVE-03 du
 [rapport de performance](../../audits/backend/audit-performance-api-localeo-live-2026-11-08.md).
@@ -2886,7 +2888,7 @@ renvoyaient vers le parcours commercial Marketplace. Appliquer LIVE-UX-13.
 | E73-CD-06 | Retours Live avec commune, curseur, pagination des lots, section ouverte, position et focus conservés. Rechargement, retour navigateur, erreurs et refus ne réaffichent pas une ressource refusée. Les liens personnels de coffrets gagnés et les validations QR/PIN restent indépendants. |
 | E73-CD-07 | Recette à 320/390/1280 px, clavier, texte agrandi, états vide/chargement/indisponible ; tests de visibilité, isolation de dotation, pagination et projection minimale. |
 | E73-CD-08 | Un seul choix de commune, dans le bandeau Découvrir. Après succès du contexte animation, une lecture commerciale distincte confirme prix et achat, sans repli du contenu ni répétition à chaque page. Après refus du contexte, aucune lecture commerciale. Un modèle non vendu garde sa présentation de lot sans action d'achat ; une lecture incertaine retire l'achat. Origine absente/invalide : aucun lien construit sur Live. |
-| E73-CD-09 | Découvrir et Ses animations : illustration Flyer à droite, pictogramme compact sans image ou en erreur. Le parcours regroupe les raccourcis itinéraire/QR/PIN dans la vignette du commerce, sous forme d'icônes accessibles et sans commandes nouvelles. Le PIN dépend toujours de l'action serveur ; la fermeture du QR relit la progression. |
+| E73-CD-09 | **Ses animations** affiche le visuel à droite, avec le pictogramme compact sans image ou en erreur. Dans **Découvrir**, l’illustration à droite décrite le 22 novembre est remplacée par la [couverture paysage du 28 novembre](../epic-85-parcours-organisateur/visuel-animation.md#couverture-des-cartes-découvrir-dans-live). Le parcours regroupe les raccourcis itinéraire/QR/PIN dans la vignette du commerce, sous forme d’icônes accessibles. Le PIN dépend de l’action serveur. La fermeture du QR relit la progression. |
 | E73-CD-10 | Passeport : les raccourcis restent à droite, sur une seule ligne, sans rangée sous le commerce. Lorsque la largeur de la vignette manque pour ses actions, le QR est prioritaire et les autres raccourcis sont masqués. Le détail d'étape conserve itinéraire et PIN autorisé. Réduire/agrandir la fenêtre restaure les raccourcis sans nouvelle commande ; les cibles restent de 44 px. |
 
 Applications affectées : Marketplace/Live et backend. Sources canoniques : cette

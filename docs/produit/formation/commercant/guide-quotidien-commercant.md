@@ -1,6 +1,6 @@
 # Localeo Pro · Votre guide au quotidien
 
-<!-- Source canonique du PDF embarqué. Édition du 26 novembre 2026. Chaque section de niveau 2 ouvre une page. Captures de Localeo Pro avec des exemples fictifs. -->
+<!-- Source canonique du PDF embarqué. Édition du 28 novembre 2026. Chaque section de niveau 2 ouvre une page. Captures de Localeo Pro avec des exemples fictifs. -->
 
 <!-- Sommaire : Prendre en main Localeo Pro -->
 
@@ -124,17 +124,23 @@ Une fois votre invitation acceptée, ouvrez **Préparation des animations**, pui
 
 ![La préparation est terminée. La ligne Déclaration à l’organisateur indique encore À faire.](illustrations/guide-quotidien/16-preparation.png)
 
-### Choisir le support adapté
-
-- **Guide privé** pour les consignes de l’équipe, à garder au comptoir.
-- **Flyer joueurs** pour faire connaître l’animation ou donner accès à l’inscription.
-- **QR de lieu** pour une chasse au trésor, à installer à votre étape. Le joueur le scanne dans Live pour ouvrir le défi.
-
 Pour un passeport, vérifiez si votre mission demande un achat. Lorsqu’il est requis, aucun montant minimum ne s’applique. Pour une tombola, suivez la mission de l’invitation. Pour une vitrine ou un produit, consultez **Préparer votre vitrine ou proposer votre produit**.
 
 ### Vérifier ou reprendre votre préparation
 
 Utilisez **Actualiser l’état** pour relire le suivi. Si une tâche doit être reprise, utilisez **Reprendre la préparation**. Une ancienne déclaration peut rester visible. **Non requise** indique qu’aucun préparatif n’est à confirmer. Les animations clôturées ou annulées figurent dans **Historique**.
+
+## 7 bis · Consulter la fiche et choisir un support
+
+Ouvrez la fiche de l’animation. Lorsque l’édition est visible en ligne, la fiche affiche le visuel choisi par l’organisateur s’il en a enregistré un.
+
+![Le visuel apparaît sous les actions de la fiche de l’animation.](illustrations/guide-quotidien/25-visuel-animation.png)
+
+Dans **Supports et équipe**, choisissez le document selon votre besoin.
+
+- **Guide privé** pour les consignes de l’équipe, à garder au comptoir.
+- **Flyer joueurs** pour faire connaître l’animation ou donner accès à l’inscription.
+- **QR de lieu** pour une chasse au trésor, à installer à votre étape. Le joueur le scanne dans Live pour ouvrir le défi.
 
 ## 8 · Préparer votre vitrine ou proposer votre produit
 

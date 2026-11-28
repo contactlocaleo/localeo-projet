@@ -8,6 +8,8 @@ les 63 critères initiaux sans les renuméroter ni modifier l'état de l'epic.
 
 ## Écart fonctionnel
 
+Depuis [E85-EVO-VISUEL](../epic-85-parcours-organisateur/visuel-animation.md), **Publication → Visuel de l’animation** centralise le choix et la prévisualisation. La génération du flyer reprend ce choix partagé avec les supports web. Les critères E73 ci-dessous documentent la livraison historique de la personnalisation du flyer.
+
 Le flyer doit présenter la dotation effectivement choisie. La promesse historique
 « coffret local digital » ne convient pas à une animation dotée de lots libres.
 Le document met en évidence le nombre d'exemplaires à gagner et le nombre de

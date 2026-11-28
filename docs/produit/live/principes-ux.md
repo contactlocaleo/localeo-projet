@@ -1,11 +1,15 @@
 # Principes directeurs UX de Localeo Live
 
-## Vignettes et raccourcis — 22 novembre 2026
+## Couvertures dans Découvrir — 28 novembre 2026
 
-Les vignettes d'animation dans Découvrir et « Ses animations » placent le visuel
-Flyer configuré à droite du titre et des informations. Sans image ou après échec,
-le pictogramme du jeu conserve un emplacement compact ; aucune photo de repli
-n'est inventée. Les actions, dates et badges d'inscription restent lisibles.
+Dans **Découvrir → Animations**, le visuel paysage ouvre la carte sur toute sa
+largeur, comme pour les coffrets. Le titre, les dates et les actions restent
+sous le bandeau. Un échec de chargement affiche le pictogramme du jeu dans
+l’emplacement réservé. Sans visuel, le pictogramme tient dans la carte compacte.
+Dans **Ses animations** sur une fiche commerce, le visuel est carré à droite
+du titre. [Rendu et formats](../../specifications/epic-85-parcours-organisateur/visuel-animation.md#couverture-des-cartes-découvrir-dans-live)
+
+## Vignettes et raccourcis — 22 novembre 2026
 
 Dans le parcours, l'itinéraire et le QR personnel appartiennent à la vignette du
 commerce et utilisent des icônes seules, avec nom accessible, infobulle, focus et

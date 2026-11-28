@@ -321,6 +321,12 @@ de mot de passe couvre 320, 390 et 1280 px, avec texte à 100 et 200 % :
 résultats dans `tmp/charte-pro-visual-final-20261122`. Ces preuves locales ne
 constituent pas une validation d'un déploiement.
 
+## Visuel de l’animation le 28 novembre 2026
+
+`25-visuel-animation.png` montre la fiche **Le passeport des commerces** de Localeo Pro à 1 100 × 900 px, sur la base `46a6990` avec l’évolution E85-EVO-VISUEL. La fiche utilise des données fictives et le WebP **Passage validé en boutique** livré avec le modèle Passeport commerçant. Les actions de la fiche précèdent l’image.
+
+La recette utilise `scripts/build-browser-tests.mjs` avec `LOCALEO_TEST_DIST=tmp/visuel-pro-guide-final-dist`, puis `node scripts/capture-merchant-guide.mjs --dist tmp/visuel-pro-guide-final-dist --port 4283 --only 25-visuel-animation --output tmp/visuel-pro-guide-qr --report-dir tmp/visuel-pro-guide-qr`. Le rapport local `provenance.json` retrace la route `/animations/passeport` et le chargement de l’image publique.
+
 ## Illustrations historiques conservées
 
 L’édition du 21 novembre 2026 reposait sur la base `74000ad` et comportait

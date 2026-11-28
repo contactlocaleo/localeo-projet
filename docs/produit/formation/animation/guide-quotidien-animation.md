@@ -1,6 +1,6 @@
 # Localeo Animation - Votre guide au quotidien
 
-<!-- Source canonique du PDF. Générateur dans localeo-animation/scripts/generate-animation-guide.py. Édition du 27 novembre 2026. Les captures montrent l’application réelle avec des données fictives. -->
+<!-- Source canonique du PDF. Générateur dans localeo-animation/scripts/generate-animation-guide.py. Édition du 28 novembre 2026. Les captures montrent l’application réelle avec des données fictives. -->
 
 <!-- Sommaire : Prendre en main votre espace -->
 
@@ -202,7 +202,7 @@ Ouvrez le brouillon dont vous voulez rendre la présentation accessible aux habi
 
 ### Compléter le brouillon avant de publier
 
-Si le contrôle propose **Ajouter un visuel**, ouvrez-le. Dans **Flyer**, choisissez une image personnalisée et sélectionnez **Enregistrer l’illustration**. Revenez au contrôle pour vérifier que l’avertissement a disparu. Vous pouvez publier avec l’illustration par défaut si les autres contrôles sont satisfaits.
+Utilisez **Ajouter un visuel** si vous souhaitez illustrer l’édition. Ce choix est facultatif.
 
 Si votre édition prévoit un tirage, vérifiez sa **Date annoncée du tirage** dans les réglages de préparation. Vous pouvez aussi y fixer des objectifs. Les objectifs sont figés à la publication.
 
@@ -212,13 +212,23 @@ Après publication, les réglages encore accessibles et la configuration publié
 
 Utilisez **Vérifier l’enregistrement** si l’action est proposée. Tant que le résultat est incertain, vérifiez son état avant de recommencer, surtout si l’action engage une somme. Une fois publiée, l’animation peut aussi apparaître dans l’agenda Live des communes publiées où un commerce participe avec un accord valide. Les habitants qui reçoivent l’alerte de publication sur leur appareil peuvent l’ouvrir pour rejoindre la fiche et s’inscrire si les inscriptions sont ouvertes.
 
+## 12 bis · Choisir le visuel de l’animation
+
+Ouvrez **Publication → Visuel de l’animation**. Vous pouvez aussi y accéder par **Ajouter un visuel** depuis la revue de publication.
+
+1. Choisissez l’un des trois exemples du modèle ou **Importer une image**. Pour l’import, utilisez un fichier JPEG, PNG ou WebP fixe de 5 Mio maximum. Une image horizontale de 1 600 × 900 px avec le sujet au centre facilite le recadrage.
+2. Vérifiez le cadrage paysage pour la fiche et les cartes **Découvrir**. L’aperçu carré correspond à **Ses animations** dans les fiches commerce de Live. Choisissez **Enregistrer le visuel**. Si vous êtes arrivé depuis un contrôle, revenez à la revue pour le relire.
+3. Une fois l’édition visible en ligne, l’image apparaît dans Marketplace, Live et la fiche Localeo Pro. Régénérez le flyer pour y intégrer la modification. Vous pouvez remplacer ou retirer le visuel depuis le même écran.
+
+![L’écran présente les trois exemples du modèle et les deux aperçus du visuel enregistré.](illustrations/guide-quotidien/visuel-animation-1280.png)
+
 <!-- Sommaire : Communiquer et suivre l’activité -->
 
 ## 13 · Faire connaître votre animation et écrire aux inscrits
 
 Une fois la présentation prête, vérifiez les supports à diffuser. Si votre organisation dispose de **Communication**, vous pouvez aussi écrire aux participants dans Localeo Live.
 
-1. Ouvrez **Publication → Supports de diffusion → Flyer**. Générez ou ouvrez le PDF et vérifiez son contenu, le lien d’inscription et le QR avant de le diffuser. Régénérez le flyer si ses renseignements ont changé et que l’action est proposée.
+1. Ouvrez **Publication → Supports de diffusion → Flyer**. Générez ou ouvrez le PDF et vérifiez son contenu, le lien d’inscription et le QR avant de le diffuser. Régénérez le flyer si le visuel ou les renseignements ont changé et que l’action est proposée.
 2. Dans **Liens et QR de diffusion**, donnez un nom au support, par exemple « Affiche mairie », puis choisissez **Créer le lien de diffusion**. Vous pouvez copier le lien ou télécharger son QR. Préparez vos supports en brouillon et partagez-les lorsque l’édition est accessible au public. Vous retrouverez les inscriptions attribuées à ce support dans le bilan.
 3. Dans **Communication**, choisissez **Messages aux participants**. Vérifiez les **Crédits disponibles** puis choisissez **Nouveau message**. Dans la fenêtre de rédaction, choisissez les destinataires, rédigez le texte et relisez l’aperçu dans Live.
 4. Choisissez **Enregistrer le brouillon**, puis **Calculer l’aperçu des destinataires**. Vérifiez l’audience avant de confirmer l’envoi ou la programmation. Pour en suivre le résultat, ouvrez le message dans l’historique.

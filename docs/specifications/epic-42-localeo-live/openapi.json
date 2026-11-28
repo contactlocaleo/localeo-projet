@@ -5055,7 +5055,7 @@
           "Animation locale"
         ],
         "summary": "Consulter Illustration Flyer Animation Publique",
-        "description": "Image explicitement choisie pour le flyer d'une animation publique, sans illustration par défaut. Réponse non mise en cache, y compris après retrait.",
+        "description": "Visuel explicitement choisi pour une animation publique. Le PNG historique est servi par défaut, ou la variante WebP demandée. Réponse non mise en cache, y compris après retrait.",
         "operationId": "consulter_illustration_flyer_animation_publique",
         "parameters": [
           {
@@ -5067,6 +5067,27 @@
               "format": "uuid",
               "title": "Animation Id"
             }
+          },
+          {
+            "name": "variante",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "fiche",
+                    "vignette",
+                    "compacte"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Variante"
+            }
           }
         ],
         "responses": {
@@ -5074,6 +5095,12 @@
             "description": "Successful Response",
             "content": {
               "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/webp": {
                 "schema": {
                   "type": "string",
                   "format": "binary"
@@ -15261,7 +15288,31 @@
               }
             ],
             "title": "Visuel Url",
-            "description": "Illustration choisie pour le flyer de l'animation ; absente sans image personnalisée. Aucun visuel de remplacement."
+            "description": "Version WebP du visuel choisi pour la fiche publique."
+          },
+          "visuel_vignette_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Visuel Vignette Url",
+            "description": "Vignette WebP Marketplace, jusqu’à 35 Kio."
+          },
+          "visuel_vignette_compacte_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Visuel Vignette Compacte Url",
+            "description": "Vignette carrée WebP Live, jusqu’à 15 Kio."
           },
           "detail_url": {
             "type": "string",

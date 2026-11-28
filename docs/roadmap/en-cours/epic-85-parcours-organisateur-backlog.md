@@ -165,6 +165,12 @@ les objectifs, les retombées observables et la couverture des mesures. La
 version interne conserve les commentaires et l’audit. Les critères **E85-CA-21
 à E85-CA-24** et les impacts figurent dans la [spécification du bilan](../../specifications/epic-85-parcours-organisateur/bilan-diffusion.md).
 
+### E85-EVO-VISUEL · Visuel partagé de l’édition du 28 novembre 2026
+
+**Publication → Visuel de l’animation** propose un import et trois exemples livrés par modèle. Le choix explicite fournit les vignettes, la fiche publique, la fiche Pro à la mise en ligne et le prochain flyer. Les critères **E85-CA-25 à 29** couvrent les choix, les formats, la reprise, les lecteurs et la recette. [Spécification](../../specifications/epic-85-parcours-organisateur/visuel-animation.md) · [Vérifications locales](../../specifications/epic-85-parcours-organisateur/verification-livraison.md#e85-evo-visuel--28-novembre-2026)
+
+Pour E85-CA-27, les cartes **Découvrir → Animations** exploitent le paysage bord à bord comme les coffrets. **Ses animations** sur la fiche commerce affiche la miniature carrée. [Rendu](../../specifications/epic-85-parcours-organisateur/visuel-animation.md#couverture-des-cartes-découvrir-dans-live) · [Vérifications locales](../../specifications/epic-85-parcours-organisateur/verification-livraison.md#couvertures-de-découvrir)
+
 ## Impacts et passage à la spécification
 
 | Sujet | Impact initial |

@@ -37194,7 +37194,7 @@
           "Animation locale"
         ],
         "summary": "Consulter Illustration Flyer Animation Publique",
-        "description": "Image explicitement choisie pour le flyer d'une animation publique, sans illustration par défaut. Réponse non mise en cache, y compris après retrait.",
+        "description": "Visuel explicitement choisi pour une animation publique. Le PNG historique est servi par défaut, ou la variante WebP demandée. Réponse non mise en cache, y compris après retrait.",
         "operationId": "consulter_illustration_flyer_animation_publique",
         "parameters": [
           {
@@ -37206,6 +37206,27 @@
               "format": "uuid",
               "title": "Animation Id"
             }
+          },
+          {
+            "name": "variante",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "fiche",
+                    "vignette",
+                    "compacte"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Variante"
+            }
           }
         ],
         "responses": {
@@ -37213,6 +37234,12 @@
             "description": "Successful Response",
             "content": {
               "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/webp": {
                 "schema": {
                   "type": "string",
                   "format": "binary"
@@ -127422,6 +127449,360 @@
         }
       }
     },
+    "/protected/animation-locale/animations/{animation_id}/visuel": {
+      "put": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Modifier Visuel Animation",
+        "operationId": "modifier_visuel_animation",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/IllustrationFlyerInput"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ChoisirExempleVisuelInput"
+                  }
+                ],
+                "title": "Payload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IllustrationFlyerPayload"
+                }
+              }
+            }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Retirer Illustration Flyer",
+        "operationId": "retirer_visuel_animation",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PublierAnimationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IllustrationFlyerPayload"
+                }
+              }
+            }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Consulter Visuel Animation",
+        "operationId": "consulter_visuel_animation",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VisuelAnimationPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/visuel/commandes/{cle}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Lire Recu Illustration Flyer",
+        "operationId": "lire_recu_visuel_animation",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "cle",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cle"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_IllustrationFlyerPayload_"
+                }
+              }
+            }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/visuel/image": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Consulter Image Visuel Animation",
+        "operationId": "consulter_image_visuel_animation",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/visuel/exemples/{exemple_id}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Consulter Exemple Visuel Animation",
+        "operationId": "consulter_exemple_visuel_animation",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "exemple_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Exemple Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "image/webp": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/protected/animation-locale/animations/{animation_id}/flyer/regenerer": {
       "post": {
         "tags": [
@@ -152467,6 +152848,17 @@
             "type": "string",
             "title": "Detail Url"
           },
+          "visuel_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Visuel Url"
+          },
           "description": {
             "anyOf": [
               {
@@ -153350,7 +153742,31 @@
               }
             ],
             "title": "Visuel Url",
-            "description": "Illustration choisie pour le flyer de l'animation ; absente sans image personnalisée. Aucun visuel de remplacement."
+            "description": "Version WebP du visuel choisi pour la fiche publique."
+          },
+          "visuel_vignette_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Visuel Vignette Url",
+            "description": "Vignette WebP Marketplace, jusqu’à 35 Kio."
+          },
+          "visuel_vignette_compacte_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Visuel Vignette Compacte Url",
+            "description": "Vignette carrée WebP Live, jusqu’à 15 Kio."
           },
           "detail_url": {
             "type": "string",
@@ -184927,6 +185343,96 @@
           "illustration_personnalisee_url"
         ],
         "title": "IllustrationFlyerPayload"
+      },
+      "ChoisirExempleVisuelInput": {
+        "properties": {
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedversion"
+          },
+          "exemple_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9_-]{0,79}$",
+            "title": "Exemple Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedVersion",
+          "exemple_id"
+        ],
+        "title": "ChoisirExempleVisuelInput"
+      },
+      "ExempleVisuelPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "apercu_url": {
+            "type": "string",
+            "title": "Apercu Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "libelle",
+          "apercu_url"
+        ],
+        "title": "ExempleVisuelPayload"
+      },
+      "VisuelAnimationPayload": {
+        "properties": {
+          "animation_version": {
+            "type": "integer",
+            "title": "Animation Version"
+          },
+          "visuel_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Visuel Url"
+          },
+          "exemple_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exemple Id"
+          },
+          "exemples": {
+            "items": {
+              "$ref": "#/components/schemas/ExempleVisuelPayload"
+            },
+            "type": "array",
+            "maxItems": 3,
+            "title": "Exemples"
+          }
+        },
+        "type": "object",
+        "required": [
+          "animation_version",
+          "visuel_url",
+          "exemple_id",
+          "exemples"
+        ],
+        "title": "VisuelAnimationPayload"
       },
       "IllustrationPublique": {
         "properties": {
